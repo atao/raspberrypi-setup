@@ -1,0 +1,8 @@
+multitor:
+  - python3-socks
+  - npm
+  - tor
+  - privoxy
+  - polipo
+  - haproxy
+  - netcat

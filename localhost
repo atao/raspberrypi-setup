@@ -1,0 +1,2 @@
+[RaspberryPi]
+localhost ansible_connection=local

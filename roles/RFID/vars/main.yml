@@ -1,0 +1,4 @@
+rfid_packages:
+  - libnfc*
+  - mfoc
+  - mfcuk

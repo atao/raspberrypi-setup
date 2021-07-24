@@ -1,0 +1,18 @@
+# See : https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
+
+[defaults]
+
+remote_user = pi
+
+# path to install and search for roles in :
+roles_path  = ./ansible_galaxy_roles
+
+# location of inventory file, eliminates need to specify -i :
+inventory = ./hosts
+
+# ignore ssh authenticity
+host_key_checking = False
+
+[ssh_connection]
+# pipelining = True
+# control_path = /tmp/ansible-ssh-%%h-%%p-%%r

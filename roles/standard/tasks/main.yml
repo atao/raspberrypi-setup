@@ -1,0 +1,17 @@
+- name: Packages installation
+  become: yes
+  become_user: root
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items: "{{ apt_packages }}"
+  
+- name: Change default python interpreter
+  become: yes
+  become_user: root
+  shell: rm /usr/bin/python ; ln -s /usr/bin/python3 /usr/bin/python
+
+- name: install
+  become: yes
+  become_user: root
+  shell: python3 -m pip install requests lxml

@@ -1,0 +1,14 @@
+- name: Git clone jackit
+  become: yes
+  become_user: root
+  git:
+    repo: https://github.com/insecurityofthings/jackit.git
+    dest: /root/jackit
+    clone: yes
+
+- name: Install jackit
+  become: yes
+  become_user: root
+  shell: python3 -m pip install -e .
+  args:
+    chdir: /root/jackit

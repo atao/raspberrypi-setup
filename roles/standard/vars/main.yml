@@ -1,0 +1,12 @@
+apt_packages:
+  - screen
+  - htop
+  - vim
+  - git
+  - nmap
+  - sqlmap
+  - python3-lxml
+  - python3-pip
+  - unattended-upgrades
+  - iptraf
+  - mc

@@ -1,0 +1,12 @@
+- hosts: RaspberryPi
+  gather_facts: no
+  become_user: root
+  roles:
+    - role: standard
+      tags: ['setup', 'always']
+    - role: multitor
+      tags: ['multitor']
+    - role: RFID
+      tags: ['rfid']
+    - role: jackit
+      tags: ['jackit']
