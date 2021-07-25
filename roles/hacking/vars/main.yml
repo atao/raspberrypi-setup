@@ -4,3 +4,9 @@ apt_packages:
   - wifite
   - mdk3
   - mdk4
+  - bully
+  - pyrit
+  - hashcat
+  - hcxpdumptool
+  - hcxpcaptool
+  - macchanger
