@@ -8,9 +8,7 @@ This is an [Ansible](https://www.ansible.com/) playbook to quickly setup my Rasp
 ## Standalone
 
 To setup directly from the Pi, run the following command :
-Before run command you must setup your Pi with [Raspberry Pi Imager](https://www.raspberrypi.org/software/) and install git and ansible.
-
-`apt update ; apt install git ansible`
+Before run command you must setup your Pi with [Raspberry Pi Imager](https://www.raspberrypi.org/software/).
 
 Next run command :
 

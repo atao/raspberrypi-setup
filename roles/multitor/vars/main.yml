@@ -1,4 +1,4 @@
-multitor:
+apt_packages:
   - python3-socks
   - npm
   - tor

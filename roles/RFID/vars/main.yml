@@ -1,4 +1,4 @@
-rfid_packages:
+apt_packages:
   - libnfc*
   - mfoc
   - mfcuk

@@ -2,6 +2,5 @@
   become: yes
   become_user: root
   apt:
-    name: "{{ item }}"
+    name: "{{ apt_packages }}"
     update_cache: yes
-  with_items: "{{ rfid_packages }}"
