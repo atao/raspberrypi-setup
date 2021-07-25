@@ -10,3 +10,5 @@
       tags: ['rfid']
     - role: jackit
       tags: ['jackit']
+    - role: hacking
+      tags: ['hacking']

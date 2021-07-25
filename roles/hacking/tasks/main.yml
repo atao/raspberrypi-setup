@@ -1,0 +1,7 @@
+- name: Packages installation
+  become: yes
+  become_user: root
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items: "{{ apt_packages }}"

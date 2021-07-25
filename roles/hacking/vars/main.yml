@@ -1,0 +1,6 @@
+apt_packages:
+  - sqlmap
+  - aircrack-ng
+  - wifite
+  - mdk3
+  - mdk4
