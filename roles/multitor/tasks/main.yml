@@ -1,20 +1,17 @@
 - name: Installation requirements
   become: yes
-  become_user: root
   apt:
     name: "{{ apt_packages }}"
     update_cache: yes
 
 - name: Install hpts from npm
   become: yes
-  become_user: root
   npm:
     name: http-proxy-to-socks
     global: yes
 
 - name: Git clone multitor
   become: yes
-  become_user: root
   git:
     repo: https://github.com/trimstray/multitor.git
     dest: /root/multitor
@@ -22,12 +19,10 @@
 
 - name: Setup multitor
   become: yes
-  become_user: root
   shell: /root/multitor/setup.sh install
 
 - name: Download file check_multitor.py
   become: yes
-  become_user: root
   get_url:
     url: https://gist.githubusercontent.com/atao/684612d7affd421b225679c5546ccd86/raw/3b4f4c2a8b950ada3bfb67b46fd4be811fa897da/check_multitor.py
     dest: /root/check_multitor.py
@@ -35,7 +30,6 @@
 
 - name: Download file run_multitor.sh
   become: yes
-  become_user: root
   get_url:
     url: https://gist.githubusercontent.com/atao/48e9dccd55f52dc9103625dfdaa4b5cf/raw/beabb3b1276ce3f889e9d8f332cf780873544de9/run_multitor.sh
     dest: /root/run_multitor.sh

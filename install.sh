@@ -5,7 +5,7 @@ echo "===          Setting up Raspberry Pi Zero           ==="
 echo "======================================================="
 
 sudo apt update
-sudo apt install python3-pip git
+sudo apt install python3-pip git -y
 sudo python3 -m pip install ansible
 
 installdir="/tmp/pi-$RANDOM"

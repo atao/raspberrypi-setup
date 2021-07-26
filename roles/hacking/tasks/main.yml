@@ -1,6 +1,5 @@
 - name: Packages installation
   become: yes
-  become_user: root
   apt:
     name: "{{ apt_packages }}"
     update_cache: yes
