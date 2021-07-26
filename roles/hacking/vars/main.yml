@@ -6,3 +6,7 @@ apt_packages:
   - mdk4
   - pyrit
   - macchanger
+  - hashcat
+  - hcxdumptool
+  - hcxpcaptool
+  - bully

@@ -1,9 +1,24 @@
+- name: Add Kali Repository
+  become: yes
+  become: root
+  apt_repository:
+    repo: deb http://http.kali.org/kali kali-rolling main non-free contrib
+    state: present
+
+- name: Add key for Kali Repository
+  become: yes
+  become: root
+  apt_key:
+    url: https://ftp-master.debian.org/keys/archive-key-6.0.asc
+    state: present
+    
 - name: Packages installation
   become: yes
   become_user: root
   apt:
     name: "{{ apt_packages }}"
     update_cache: yes
+    autoremove: yes
 
 - name: Change default python interpreter
   become: yes
