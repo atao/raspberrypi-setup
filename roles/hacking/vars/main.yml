@@ -8,5 +8,5 @@ apt_packages:
   - macchanger
   - hashcat
   - hcxdumptool
-  - hcxpcaptool
+  - hcxtools
   - bully
