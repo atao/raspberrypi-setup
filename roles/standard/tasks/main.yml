@@ -1,9 +1,7 @@
 - name: Add key for Kali Repository
   become: yes
-  apt_key:
-    url: https://ftp-master.debian.org/keys/archive-key-6.0.asc
-    state: present
-    
+  shell: wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add
+  
 - name: Add Kali Repository
   become: yes
   apt_repository:
