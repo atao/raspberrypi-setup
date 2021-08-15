@@ -1,13 +1,13 @@
-- name: Add Kali Repository
-  become: yes
-  apt_repository:
-    repo: deb http://http.kali.org/kali kali-rolling main non-free contrib
-    state: present
-
 - name: Add key for Kali Repository
   become: yes
   apt_key:
     url: https://ftp-master.debian.org/keys/archive-key-6.0.asc
+    state: present
+    
+- name: Add Kali Repository
+  become: yes
+  apt_repository:
+    repo: deb http://http.kali.org/kali kali-rolling main non-free contrib
     state: present
 
 - name: Packages installation
