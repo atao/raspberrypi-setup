@@ -10,3 +10,4 @@ apt_packages:
   - iptraf
   - mc
   - omxplayer
+  - youtube-dl
