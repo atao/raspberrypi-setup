@@ -1,3 +1,13 @@
+- name: Add key for Kali Repository
+  become: yes
+  shell: wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add
+  
+- name: Add Kali Repository
+  become: yes
+  apt_repository:
+    repo: deb http://http.kali.org/kali kali-rolling main non-free contrib
+    state: present
+
 - name: Packages installation
   become: yes
   apt:
