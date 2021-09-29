@@ -1,4 +1,5 @@
 apt_packages:
   - libnfc-bin
+  - libnfc-examples
   - mfoc
   - mfcuk
