@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "======================================================="
-echo "===          Setting up Raspberry Pi Zero           ==="
+echo "===          Setting up your Raspberry Pi           ==="
 echo "======================================================="
 
 sudo apt update
