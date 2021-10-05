@@ -16,7 +16,7 @@ Before run command you must setup your Pi with [Raspberry Pi Imager](https://www
 Next run command :
 
 ```
-curl -s https://raw.githubusercontent.com/atao/raspberrypi-setup/main/install.sh | /bin/bash
+ curl -s https://raw.githubusercontent.com/atao/raspberrypi-setup/main/install.sh | bash -s -- all
 ```
 ## Ansible
 
