@@ -1,7 +1,7 @@
 - name: Add key for Kali Repository
   become: yes
   shell: wget -q -O - https://archive.kali.org/archive-key.asc | apt-key add
-  
+
 - name: Add Kali Repository
   become: yes
   apt_repository:
