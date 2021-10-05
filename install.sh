@@ -4,6 +4,13 @@ echo "======================================================="
 echo "===          Setting up your Raspberry Pi           ==="
 echo "======================================================="
 
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied, please choose the roles to install"
+    echo "exiting..."
+    exit 1
+fi
+
 sudo apt update
 sudo apt install python3-pip git -y
 sudo python3 -m pip install ansible
