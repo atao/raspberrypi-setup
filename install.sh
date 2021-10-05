@@ -18,7 +18,7 @@ if [ ! -d $installdir ]; then
     exit 1
 else
     cd $installdir
-    ansible-playbook playbook.yml -i localhost --tags all
+    ansible-playbook playbook.yml -i localhost --tags $1
 fi
 
 echo "cleaning up..."
