@@ -4,9 +4,9 @@
 # Raspberry Pi Setup
 
 This is an [Ansible](https://www.ansible.com/) playbook to quickly setup my Raspberry Pi.
-Work with (B, B+, 2B, 3B, 3B+, 4B, Zero W, 400)
+Work with (B, B+, 2B, 3B, 3B+, 4B, Zero W, Zero 2W, 400)
 
-Successfully tested with Pi Zero W and Pi 4B.
+Successfully tested with Pi Zero W, Pi Zero 2W and Pi 4B.
 
 ## Standalone
 
