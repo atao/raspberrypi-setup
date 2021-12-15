@@ -36,8 +36,8 @@ if [ $# -eq 0 ]
 fi
 
 sudo apt update
-sudo apt install python3-pip git -y
-sudo pip install --upgrade pip
+sudo apt install python3-pip python3-setuptools git -y
+sudo -u pi pip install --upgrade pip
 sudo python3 -m pip install ansible
 
 installdir="/tmp/pi-$RANDOM"
