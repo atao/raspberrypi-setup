@@ -1,0 +1,5 @@
+- name: Packages installation
+  become: yes
+  apt:
+    name: "{{ apt_packages }}"
+    update_cache: yes
