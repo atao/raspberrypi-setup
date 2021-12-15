@@ -25,12 +25,12 @@ headerU()   { echo -e "${underline}${bold}${jaune}$*${reset}";  }
 clear && echo -e "\n\n"
 header "======================================================="
 header "===          Setting up your Raspberry Pi           ==="
-headerU "======================================================="
+headerU "=======================================================\n"
 
 if [ $# -eq 0 ]
   then
-    shw_warn "No arguments supplied, please choose the roles to install"
-    shw_warn "exiting..."
+    shw_warn "No arguments supplied, please choose the roles to install\n"
+    shw_warn "exiting...\n"
     exit 1
 fi
 
@@ -43,18 +43,18 @@ mkdir $installdir
 
 git clone https://github.com/atao/raspberrypi-setup.git $installdir
 if [ ! -d $installdir ]; then
-    shw_err "git cloned failed"
-    shw_err "exiting..."
+    shw_err "git cloned failed\n"
+    shw_err "exiting...\n"
     exit 1
 else
     cd $installdir
     ansible-playbook playbook.yml -i localhost --tags $1
 fi
 
-shw_info "cleaning up..."
+shw_info "cleaning up...\n"
 
 rm -Rfv /tmp/$installdir
 
-shw_OK "and we are done! Enjoy!"
+shw_OK "and we are done! Enjoy!\n"
 
 exit 0
