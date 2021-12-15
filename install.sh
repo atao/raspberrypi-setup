@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Typo
 bold=$(tput bold)
 underline=$(tput sgr 0 1)
 reset=$(tput sgr0)
