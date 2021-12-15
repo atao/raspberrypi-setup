@@ -32,7 +32,7 @@ You can choose what you want to install with tags :
 - **jackit** install [jackit](https://github.com/insecurityofthings/jackit) for exploit code for Mousejack
 - **multitor** install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor))
 - **rfid** install RFID tools for NFC (libnfc, mfoc, mfcuk)
-- **hacking** install hacking tools like sqlmap and Wifi tools.
+- **wifi** install Wifi tools.
 
 
 Inspired from [nico2che / mac-setup](https://github.com/nico2che/mac-setup)
