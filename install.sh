@@ -55,6 +55,6 @@ shw_info "cleaning up...\n"
 
 rm -Rfv /tmp/$installdir
 
-shw_OK "and we are done! Enjoy!\n"
+shw_OK " Enjoy!\n"
 
 exit 0
