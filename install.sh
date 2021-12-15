@@ -51,7 +51,7 @@ else
     ansible-playbook playbook.yml -i localhost --tags $1
 fi
 
-shw_info "cleaning up...\n"
+shw_info "cleaning up...\n\n"
 
 rm -Rfv /tmp/$installdir
 
