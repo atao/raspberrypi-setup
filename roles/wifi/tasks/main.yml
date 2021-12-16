@@ -3,3 +3,33 @@
   apt:
     name: "{{ apt_packages }}"
     update_cache: yes
+
+- name: Git clone hcxtools
+  become: yes
+  become_user: root
+  git:
+    repo: https://github.com/ZerBea/hcxtools.git
+    dest: /root/hcxtools
+    clone: yes
+
+- name: Install hcxtools
+  become: yes
+  become_user: root
+  shell: make ; make install
+  args:
+    chdir: /root/hcxtools
+
+- name: Git clone hcxdumptool
+  become: yes
+  become_user: root
+  git:
+    repo: ttps://github.com/ZerBea/hcxdumptool.git
+    dest: /root/hcxdumptool
+    clone: yes
+
+- name: Install hcxdumptool
+  become: yes
+  become_user: root
+  shell: make ; make install
+  args:
+    chdir: /root/hcxdumptool
