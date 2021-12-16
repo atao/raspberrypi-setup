@@ -37,7 +37,7 @@ fi
 
 sudo apt update
 sudo apt install python3-pip python3-setuptools git -y
-sudo -u pi pip install --upgrade pip
+sudo -u $(whoami) python3 -m pip install --upgrade pip
 sudo python3 -m pip install ansible
 
 installdir="/tmp/pi-$RANDOM"
@@ -54,9 +54,10 @@ else
 fi
 
 shw_info "cleaning up...\n\n"
-
 rm -Rfv /tmp/$installdir
 
-shw_OK " Enjoy!\n"
+shw_info "Upgrade packages...\n\n"
+sudo apt upgrade -y
 
+shw_OK " Enjoy!\n"
 exit 0

@@ -34,5 +34,6 @@ You can choose what you want to install with tags :
 - **rfid** install RFID tools for NFC (libnfc, mfoc, mfcuk)
 - **wifi** install Wifi tools.
 
+--
 
 Inspired from [nico2che / mac-setup](https://github.com/nico2che/mac-setup)
