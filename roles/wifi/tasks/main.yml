@@ -23,7 +23,7 @@
   become: yes
   become_user: root
   git:
-    repo: ttps://github.com/ZerBea/hcxdumptool.git
+    repo: https://github.com/ZerBea/hcxdumptool.git
     dest: /root/hcxdumptool
     clone: yes
 
