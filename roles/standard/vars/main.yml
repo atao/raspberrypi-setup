@@ -10,5 +10,4 @@ apt_packages:
   - unattended-upgrades
   - iptraf
   - mc
-  - omxplayer
   - youtube-dl
