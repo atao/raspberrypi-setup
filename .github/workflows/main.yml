@@ -14,6 +14,5 @@ jobs:
       with:
         targets: "./"
         override-deps: |
-#          ansible==2.9
           ansible-lint==4.3.7
         args: "-q"
