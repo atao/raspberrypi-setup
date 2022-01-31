@@ -11,3 +11,7 @@ apt_packages:
   - iptraf
   - mc
   - youtube-dl
+
+pip_packages:
+  - requests
+  - lxml

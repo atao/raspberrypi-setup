@@ -9,6 +9,7 @@
   become: yes
   shell: rm /usr/bin/python ; ln -s /usr/bin/python3 /usr/bin/python
 
-- name: install
-  become: yes
-  shell: python3 -m pip install requests lxml
+- name: Install python 3 packages
+  pip:
+    name: "{{ pip_packages }}"
+    executable: pip3.3
