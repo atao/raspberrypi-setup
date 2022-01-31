@@ -3,10 +3,8 @@ name: Ansible Lint
 on: [push, pull_request]
 
 jobs:
-  build:
-
+  Lint:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Lint Ansible Playbook
@@ -15,4 +13,4 @@ jobs:
         targets: "./"
         override-deps: |
           ansible-lint==5.3.2
-        args: "-q"
+        args: ""
