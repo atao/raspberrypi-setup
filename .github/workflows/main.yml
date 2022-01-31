@@ -3,7 +3,7 @@ name: Ansible Lint
 on: [push, pull_request]
 
 jobs:
-  Lint:
+  ansible-lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
