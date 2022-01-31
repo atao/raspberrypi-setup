@@ -19,7 +19,7 @@
 
 - name: Setup multitor
   become: yes
-  shell: /root/multitor/setup.sh install
+  command: /root/multitor/setup.sh install
 
 - name: Download file check_multitor.py
   become: yes

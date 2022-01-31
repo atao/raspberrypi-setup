@@ -30,6 +30,6 @@
 - name: Install hcxdumptool
   become: yes
   become_user: root
-  shell: make ; make install
+  command: make ; make install
   args:
     chdir: /root/hcxdumptool
