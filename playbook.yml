@@ -7,7 +7,7 @@
       tags: ['setup']
     - role: multitor
       tags: ['multitor']
-    - role: RFID
+    - role: rfid
       tags: ['rfid']
     - role: jackit
       tags: ['jackit']
