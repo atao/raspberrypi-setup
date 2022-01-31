@@ -6,16 +6,6 @@ jobs:
   ansible-lint:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@master
-      with:
-        targets: "."
-        args: ""
-        
-  lint:
-    runs-on: ubuntu-20.04
-    steps:
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
@@ -26,4 +16,4 @@ jobs:
 
     - name: ansible-lint changed roles
       continue-on-error: true
-      run: ansible-lint *.yml
+      run: ansible-lint playbook.yml
