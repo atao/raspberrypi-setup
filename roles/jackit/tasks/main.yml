@@ -9,6 +9,6 @@
 - name: Install jackit
   become: yes
   become_user: root
-  shell: python3 -m pip install -e .
-  args:
-    chdir: /root/jackit
+  pip:
+    requirements: /root/jackit/requirements.txt
+    executable: pip3.3
