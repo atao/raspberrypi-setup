@@ -1,4 +1,4 @@
-name: Ansible Lint  # feel free to pick your own name
+name: Ansible Lint
 
 on: [push, pull_request]
 
