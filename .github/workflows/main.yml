@@ -12,3 +12,18 @@ jobs:
       with:
         targets: "."
         args: ""
+        
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+          
+    - name: Install ansible, ansible-lint, yamllint
+      run: pip3 install yamllint ansible ansible-lint
+
+    - name: ansible-lint changed roles
+      continue-on-error: true
+      run: ansible-lint *.yml
