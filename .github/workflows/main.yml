@@ -16,4 +16,4 @@ jobs:
 
     - name: ansible-lint changed roles
       continue-on-error: true
-      run: pwd ; ls ; ansible-lint playbook.yml
+      run: ansible-lint /home/runner/work/raspberrypi-setup/raspberrypi-setup/playbook.yml
