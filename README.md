@@ -6,6 +6,8 @@
 This is an [Ansible](https://www.ansible.com/) playbook to quickly setup my Raspberry Pi.
 Work with (B, B+, 2B, 3B, 3B+, 4B, Zero W, Zero 2W, 400)
 
+It should be working well on Debian distribution and Debian based distributions.
+
 Successfully tested with Pi Zero W, Pi Zero 2W and Pi 4B.
 
 ## Standalone
