@@ -3,6 +3,7 @@ apt_packages:
   - npm
   - tor
   - privoxy
-  - polipo
   - haproxy
   - netcat
+
+repo_polipo: "/root/polipo"
