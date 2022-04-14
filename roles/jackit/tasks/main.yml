@@ -11,4 +11,4 @@
   become_user: root
   pip:
     requirements: /root/jackit/requirements.txt
-    executable: pip3.3
+    executable: pip3
