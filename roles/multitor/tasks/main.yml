@@ -48,7 +48,7 @@
 - name: Send file - check_multitor.py
   become: yes
   copy:
-    src: Scripts/check_multitor.py
+    src: scripts/check_multitor.py
     dest: /root/check_multitor.py
     mode: '755'
     force: yes
@@ -56,7 +56,7 @@
 - name: Send file - run_multitor.sh
   become: yes
   copy:
-    src: Scripts/run_multitor.sh
+    src: scripts/run_multitor.sh
     dest: /root/run_multitor.sh
     mode: '755'
     force: yes
