@@ -15,3 +15,4 @@ jobs:
       uses: roles-ansible/check-ansible-debian-buster-action@master
       with:
         targets: "playbook.yml"
+        hosts: 'localhost'
