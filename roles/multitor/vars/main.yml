@@ -6,4 +6,4 @@ apt_packages:
   - haproxy
   - netcat
 
-repo_polipo: "/root/polipo"
+repo_polipo: "$PWD/polipo"
