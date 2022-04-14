@@ -16,7 +16,6 @@
     chdir: "{{ repo_polipo }}"
 
 - name: Add Polipo to PATH
-  #become: yes
   copy:
     src: "{{ repo_polipo }}/polipo"
     dest: /usr/bin/polipo
