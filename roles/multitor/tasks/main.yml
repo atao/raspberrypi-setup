@@ -5,7 +5,6 @@
     update_cache: yes
 
 - name: Git clone Polipo
-  become: yes
   git:
     repo: https://github.com/jech/polipo.git
     dest: "{{ repo_polipo }}"
@@ -17,10 +16,13 @@
     chdir: "{{ repo_polipo }}"
 
 - name: Add Polipo to PATH
+  #become: yes
   copy:
     src: "{{ repo_polipo }}/polipo"
     dest: /usr/bin/polipo
     mode: '755'
+    force: yes
+    remote_src: yes
 
 - name: Remove Polipo Git folder
   file:
