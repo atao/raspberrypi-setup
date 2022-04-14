@@ -14,4 +14,4 @@ jobs:
       # replace "master" with any valid ref
       uses: roles-ansible/check-ansible-debian-buster-action@master
       with:
-        targets: "./"
+        targets: "playbook.yml"
