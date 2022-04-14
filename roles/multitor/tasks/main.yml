@@ -12,7 +12,7 @@
     clone: yes
 
 - name: Build Polipo
-  shell: make install
+  shell: make
   args:
     chdir: "{{ repo_polipo }}"
 
