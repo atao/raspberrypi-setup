@@ -5,3 +5,5 @@ apt_packages:
   - privoxy
   - haproxy
   - netcat
+
+repo_polipo: "/root/polipo"
