@@ -6,9 +6,28 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          path: "${{ github.repository }}"
-      - name: molecule
-        uses: robertdebock/molecule-action@4.0.7
+    - name: Perform integration testing with ansible-test
+      uses: ansible-community/ansible-test-gh-action@release/v1
+      with:
+        ansible-core-version: stable-2.11
+        pre-test-cmd: echo This runs before the ansible-test invocation
+        python-version: 3.9
+        target-python-version: 3.9
+        testing-type: integration
+        test-deps: ansible.netcommon
+    - name: Perform sanity testing with ansible-test
+      uses: ansible-community/ansible-test-gh-action@release/v1
+      with:
+        ansible-core-version: stable-2.11
+        testing-type: sanity
+    - name: Perform unit testing with ansible-test
+      uses: ansible-community/ansible-test-gh-action@release/v1
+      with:
+        ansible-core-version: stable-2.11
+        pre-test-cmd: echo This runs before the ansible-test invocation
+        python-version: 3.9
+        target-python-version: 3.9
+        testing-type: units
+        test-deps: >-
+          ansible.netcommon
+          ansible.utils
