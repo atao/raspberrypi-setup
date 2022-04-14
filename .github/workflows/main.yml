@@ -3,14 +3,16 @@ name: Ansible Lint
 on: [push, pull_request]
 
 jobs:
-  ansible-lint:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Lint Ansible Playbook
-      uses: ansible/ansible-lint-action@main
-      with:
-        targets: ""
-        override-deps: |
-          ansible-lint==5.3.2
-        args: "-x git-latest,command-instead-of-shell"
+      # Important: This sets up your GITHUB_WORKSPACE environment variable
+      - uses: actions/checkout@v2
+
+      - name: Run ansible-lint
+        # replace `main` with any valid ref, or tags like `v6`
+        uses: ansible-community/ansible-lint-action@main
+        # optional:
+        # with:
+        #   path: "playbooks/"  # <-- only one value is allowed
