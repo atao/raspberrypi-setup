@@ -44,17 +44,19 @@
 - name: Setup multitor
   become: yes
   command: /root/multitor/setup.sh install
-
-- name: Download file check_multitor.py
+   
+- name: Send file - check_multitor.py
   become: yes
-  get_url:
-    url: https://gist.githubusercontent.com/atao/684612d7affd421b225679c5546ccd86/raw/3b4f4c2a8b950ada3bfb67b46fd4be811fa897da/check_multitor.py
+  copy:
+    src: Scripts/check_multitor.py
     dest: /root/check_multitor.py
-    mode: '0755'
-
-- name: Download file run_multitor.sh
+    mode: '755'
+    force: yes
+    
+- name: Send file - run_multitor.sh
   become: yes
-  get_url:
-    url: https://gist.githubusercontent.com/atao/48e9dccd55f52dc9103625dfdaa4b5cf/raw/beabb3b1276ce3f889e9d8f332cf780873544de9/run_multitor.sh
+  copy:
+    src: Scripts/run_multitor.sh
     dest: /root/run_multitor.sh
-    mode: '0755'
+    mode: '755'
+    force: yes
