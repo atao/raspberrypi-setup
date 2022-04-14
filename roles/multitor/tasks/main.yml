@@ -4,6 +4,29 @@
     name: "{{ apt_packages }}"
     update_cache: yes
 
+- name: Git clone Polipo
+  become: yes
+  git:
+    repo: https://github.com/jech/polipo.git
+    dest: /root/polipo
+    clone: yes
+
+- name: Build Polipo
+  shell: make install
+  args:
+    chdir: /root/polipo
+
+- name: Add Polipo to PATH
+  copy:
+    src: /root/polipo/polipo
+    dest: /usr/bin/polipo
+    mode: '755'
+
+- name: Remove Polipo Git folder
+  file:
+      path: /root/polipo
+      state: absent
+
 - name: Install hpts from npm
   become: yes
   npm:
