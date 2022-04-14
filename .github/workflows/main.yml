@@ -4,30 +4,14 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+
     steps:
-    - name: Perform integration testing with ansible-test
-      uses: ansible-community/ansible-test-gh-action@release/v1
+    # Important: This sets up your GITHUB_WORKSPACE environment variable
+    - uses: actions/checkout@v2
+
+    - name: ansible check with debian:buster
+      # replace "master" with any valid ref
+      uses: roles-ansible/check-ansible-debian-buster-action@master
       with:
-        ansible-core-version: stable-2.11
-        pre-test-cmd: echo This runs before the ansible-test invocation
-        python-version: 3.9
-        target-python-version: 3.9
-        testing-type: integration
-        test-deps: ansible.netcommon
-    - name: Perform sanity testing with ansible-test
-      uses: ansible-community/ansible-test-gh-action@release/v1
-      with:
-        ansible-core-version: stable-2.11
-        testing-type: sanity
-    - name: Perform unit testing with ansible-test
-      uses: ansible-community/ansible-test-gh-action@release/v1
-      with:
-        ansible-core-version: stable-2.11
-        pre-test-cmd: echo This runs before the ansible-test invocation
-        python-version: 3.9
-        target-python-version: 3.9
-        testing-type: units
-        test-deps: >-
-          ansible.netcommon
-          ansible.utils
+        targets: "./"
