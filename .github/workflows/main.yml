@@ -1,4 +1,4 @@
-name: Ansible Lint
+name: Ansible Test
 
 on: [push, pull_request]
 
