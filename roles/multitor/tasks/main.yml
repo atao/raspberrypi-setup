@@ -8,23 +8,23 @@
   become: yes
   git:
     repo: https://github.com/jech/polipo.git
-    dest: /root/polipo
+    dest: "{{ repo_polipo }}"
     clone: yes
 
 - name: Build Polipo
   shell: make install
   args:
-    chdir: /root/polipo
+    chdir: "{{ repo_polipo }}"
 
 - name: Add Polipo to PATH
   copy:
-    src: /root/polipo/polipo
+    src: "{{ repo_polipo }}/polipo"
     dest: /usr/bin/polipo
     mode: '755'
 
 - name: Remove Polipo Git folder
   file:
-      path: /root/polipo
+      path: "{{ repo_polipo }}"
       state: absent
 
 - name: Install hpts from npm
