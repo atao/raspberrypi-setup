@@ -15,11 +15,6 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
-        with:
-          path: 'geerlingguy.clamav'
-
       - name: Set up Python 3.
         uses: actions/setup-python@v2
         with:
