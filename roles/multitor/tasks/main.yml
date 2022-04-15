@@ -38,12 +38,18 @@
   become: yes
   git:
     repo: https://github.com/trimstray/multitor.git
-    dest: /root/multitor
+    dest: "$PWD/multitor"
     clone: yes
 
 - name: Setup multitor
   become: yes
-  command: /root/multitor/setup.sh install
+  command: $PWD/multitor/setup.sh install
+
+- name: Remove multitor Git folder
+  become_user: root
+  file:
+    path: "$PWD/multitor"
+    state: absent
 
 - name: Send file - check_multitor.py
   become: yes
