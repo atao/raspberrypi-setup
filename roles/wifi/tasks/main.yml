@@ -5,31 +5,39 @@
     update_cache: yes
 
 - name: Git clone hcxtools
-  become: yes
   become_user: root
   git:
-    repo: https://github.com/ZerBea/hcxtools.git
-    dest: /root/hcxtools
+    repo: "https://github.com/ZerBea/hcxtools.git"
+    dest: "$PWD/hcxtools"
     clone: yes
 
 - name: Install hcxtools
-  become: yes
   become_user: root
-  shell: make ; make install
+  shell: make
   args:
-    chdir: /root/hcxtools
+    chdir: "$PWD/hcxtools"
 
-- name: Git clone hcxdumptool
-  become: yes
+- name: Remove hcxtools Git folder
+  become_user: root
+  file:
+    path: "$PWD/hcxtools"
+    state: absent
+
+- name: Git clone hcxtools
   become_user: root
   git:
-    repo: https://github.com/ZerBea/hcxdumptool.git
-    dest: /root/hcxdumptool
+    repo: "https://github.com/ZerBea/hcxdumptool.git"
+    dest: "$PWD/hcxdumptool"
     clone: yes
 
 - name: Install hcxdumptool
-  become: yes
   become_user: root
-  command: make ; make install
+  shell: make
   args:
-    chdir: /root/hcxdumptool
+    chdir: "$PWD/hcxdumptool"
+
+- name: Remove hcxdumptool Git folder
+  become_user: root
+  file:
+    path: "$PWD/hcxdumptool"
+    state: absent
