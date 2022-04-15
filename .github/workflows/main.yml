@@ -1,18 +1,14 @@
-name: Ansible Test
+name: YAML Lint
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  lintAllTheThings:
     runs-on: ubuntu-latest
-
     steps:
-    # Important: This sets up your GITHUB_WORKSPACE environment variable
-    - uses: actions/checkout@v2
-
-    - name: ansible check with debian:buster
-      # replace "master" with any valid ref
-      uses: roles-ansible/check-ansible-debian-buster-action@master
-      with:
-        targets: "playbook.yml"
-        hosts: 'localhost'
+      - uses: actions/checkout@v2
+      - name: yaml-lint
+        uses: ibiqlik/action-yamllint@v3
+        with:
+          file_or_dir: .
+          config_file: .yamllint.yml
