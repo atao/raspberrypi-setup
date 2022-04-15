@@ -44,7 +44,7 @@
 - name: Setup multitor
   become: yes
   command: /root/multitor/setup.sh install
-   
+
 - name: Send file - check_multitor.py
   become: yes
   copy:
@@ -52,7 +52,7 @@
     dest: /root/check_multitor.py
     mode: '755'
     force: yes
-    
+
 - name: Send file - run_multitor.sh
   become: yes
   copy:
