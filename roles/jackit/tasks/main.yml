@@ -1,14 +1,20 @@
 - name: Git clone jackit
-  become: yes
+  become: true
   become_user: root
   git:
     repo: https://github.com/insecurityofthings/jackit.git
     dest: /root/jackit
-    clone: yes
+    clone: true
 
 - name: Install jackit
-  become: yes
+  become: true
   become_user: root
   pip:
     requirements: /root/jackit/requirements.txt
     executable: pip3
+
+- name: install jackit
+  become: true
+  script: /root/jackit/setup.py install
+  args:
+    executable: python3
