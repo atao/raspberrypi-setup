@@ -8,36 +8,24 @@
   become_user: root
   git:
     repo: "https://github.com/ZerBea/hcxtools.git"
-    dest: "$PWD/hcxtools"
+    dest: "/root/hcxtools"
     clone: yes
 
 - name: Install hcxtools
   become_user: root
   shell: make
   args:
-    chdir: "$PWD/hcxtools"
-
-- name: Remove hcxtools Git folder
-  become_user: root
-  file:
-    path: "$PWD/hcxtools"
-    state: absent
+    chdir: "/root/hcxtools"
 
 - name: Git clone hcxtools
   become_user: root
   git:
     repo: "https://github.com/ZerBea/hcxdumptool.git"
-    dest: "$PWD/hcxdumptool"
+    dest: "/root/hcxdumptool"
     clone: yes
 
 - name: Install hcxdumptool
   become_user: root
   shell: make
   args:
-    chdir: "$PWD/hcxdumptool"
-
-- name: Remove hcxdumptool Git folder
-  become_user: root
-  file:
-    path: "$PWD/hcxdumptool"
-    state: absent
+    chdir: "/root/hcxdumptool"
