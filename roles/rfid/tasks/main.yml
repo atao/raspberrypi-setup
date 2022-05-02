@@ -3,3 +3,14 @@
   apt:
     name: "{{ apt_packages }}"
     update_cache: yes
+
+- name: Download std.keys from MifareClassicTool
+  get_url:
+    url: https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files/std.keys
+    dest: /root/std.keys
+
+
+- name: Download extended-std.keys from MifareClassicTool
+  get_url:
+    url: https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files/extended-std.keys
+    dest: /root/extended-std.keys
