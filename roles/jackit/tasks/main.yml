@@ -6,15 +6,14 @@
     dest: /root/jackit
     clone: true
 
-- name: Install jackit
+- name: Install requirements
   become: true
   become_user: root
   pip:
     requirements: /root/jackit/requirements.txt
     executable: pip3
 
-- name: install jackit
+- name: Install jackit
   become: true
-  script: /root/jackit/setup.py install
-  args:
-    executable: python3
+  become_user: root
+  shell: python3 /root/jackit/setup.py install
