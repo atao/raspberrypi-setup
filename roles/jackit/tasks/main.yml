@@ -16,4 +16,6 @@
 - name: Install jackit
   become: true
   become_user: root
-  shell: python3 /root/jackit/setup.py install
+  shell: python3 setup.py install
+  args:
+    chdir: /root/jackit/
