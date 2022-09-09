@@ -5,6 +5,7 @@ apt_packages:
   - git
   - nmap
   - sqlmap
+  - proxychains
   - python3-lxml
   - python3-pip
   - unattended-upgrades
