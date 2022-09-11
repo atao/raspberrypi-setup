@@ -5,10 +5,6 @@
     update_cache: yes
     autoremove: yes
 
-# - name: Change default python interpreter
-#   become: yes
-#   shell: rm /usr/bin/python ; ln -s /usr/bin/python3 /usr/bin/python
-
 - name: Install python 3 packages
   pip:
     name: "{{ pip_packages }}"
