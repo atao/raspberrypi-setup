@@ -1,3 +1,5 @@
+[![YAML Lint](https://github.com/atao/raspberrypi-setup/actions/workflows/main.yml/badge.svg)](https://github.com/atao/raspberrypi-setup/actions/workflows/main.yml)
+
 # Raspberry Pi Setup
 
 This is an [Ansible](https://www.ansible.com/) playbook to quickly setup my Raspberry Pi.
