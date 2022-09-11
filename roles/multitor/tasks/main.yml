@@ -38,18 +38,18 @@
   become: yes
   git:
     repo: https://github.com/trimstray/multitor.git
-    dest: "/root/multitor"
+    dest: "/home/{{ lookup('env', 'USER') }}/multitor"
     clone: yes
 
 - name: Setup multitor
   become: yes
-  command: /root/multitor/setup.sh install
+  command: /home/{{ lookup('env', 'USER') }}/multitor/setup.sh install
 
 - name: Send file - check_multitor.py
   become: yes
   copy:
     src: scripts/check_multitor.py
-    dest: /root/check_multitor.py
+    dest: /home/{{ lookup('env', 'USER') }}/check_multitor.py
     mode: '755'
     force: yes
 
@@ -57,6 +57,6 @@
   become: yes
   copy:
     src: scripts/run_multitor.sh
-    dest: /root/run_multitor.sh
+    dest: /home/{{ lookup('env', 'USER') }}/run_multitor.sh
     mode: '755'
     force: yes

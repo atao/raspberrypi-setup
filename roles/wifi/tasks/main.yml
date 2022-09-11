@@ -8,24 +8,24 @@
   become_user: root
   git:
     repo: "https://github.com/ZerBea/hcxtools.git"
-    dest: "/root/hcxtools"
+    dest: "/home/{{ lookup('env', 'USER') }}/hcxtools"
     clone: yes
 
 - name: Install hcxtools
   become_user: root
   shell: make
   args:
-    chdir: "/root/hcxtools"
+    chdir: "/home/{{ lookup('env', 'USER') }}/hcxtools"
 
 - name: Git clone hcxtools
   become_user: root
   git:
     repo: "https://github.com/ZerBea/hcxdumptool.git"
-    dest: "/root/hcxdumptool"
+    dest: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
     clone: yes
 
 - name: Install hcxdumptool
   become_user: root
   shell: make
   args:
-    chdir: "/root/hcxdumptool"
+    chdir: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
