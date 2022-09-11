@@ -13,3 +13,10 @@
   pip:
     name: "{{ pip_packages }}"
     executable: pip3
+
+- name: Vim config file
+  copy:
+    dest: "/home/{{ lookup('env', 'USER') }}/.vimrc"
+    content: |
+      set mouse-=a
+      syntax enable
