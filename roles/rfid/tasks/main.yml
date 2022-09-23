@@ -6,14 +6,14 @@
 
 - name: Download std.keys from MifareClassicTool
   get_url:
-    url: https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
-         Mifare%20Classic%20Tool/app/src/main/assets/key-files/std.keys
+    url: "https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
+         Mifare%20Classic%20Tool/app/src/main/assets/key-files/std.keys"
     dest: /home/{{ lookup('env', 'USER') }}/std.keys
     force: yes
 
 - name: Download extended-std.keys from MifareClassicTool
   get_url:
-    url: https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
-         Mifare%20Classic%20Tool/app/src/main/assets/key-files/extended-std.keys
+    url: "https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
+         Mifare%20Classic%20Tool/app/src/main/assets/key-files/extended-std.keys"
     dest: /home/{{ lookup('env', 'USER') }}/extended-std.keys
     force: yes
