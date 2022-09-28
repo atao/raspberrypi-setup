@@ -18,7 +18,7 @@
     dest: /home/{{ lookup('env', 'USER') }}/extended-std.keys
     force: yes
  
- - name: Download mct2dmp from bm-mifare-classic
+- name: Download mct2dmp from bm-mifare-classic
   get_url:
     url: "https://github.com/blogmotion/bm-mifare-classic/raw/master/\
          conversion/mct2dmp%20-%20bash%20version/mct2dmp.sh"
