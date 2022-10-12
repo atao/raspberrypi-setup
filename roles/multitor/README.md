@@ -1,5 +1,8 @@
 **Issue with multitor**
-[See issue on project](https://github.com/trimstray/multitor/issues/19)
+
+See issues on project :
+* [Multitor directory: ownership bug #3](https://github.com/trimstray/multitor/issues/3)
+* [bad multitor directory owner #19](https://github.com/trimstray/multitor/issues/19)
 
 `[!] bad multitor directory owner`
 
