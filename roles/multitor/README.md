@@ -1,5 +1,5 @@
 **Issue with multitor**
-[See Issue on project](https://github.com/trimstray/multitor/issues/19)
+[See issue on project](https://github.com/trimstray/multitor/issues/19)
 
 `[!] bad multitor directory owner`
 
