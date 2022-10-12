@@ -10,6 +10,8 @@ Run this :
 
 `sudo chown debian-tor -R /var/lib/multitor`
 
+---
+
 **Issues with script check_multitor.py** ([Python Requests](https://requests.readthedocs.io/en/latest/))
 
 [urllib3.exceptions.LocationParseError: Failed to parse #5476](https://github.com/psf/requests/issues/5476)
