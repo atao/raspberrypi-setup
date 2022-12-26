@@ -4,7 +4,7 @@
   become_user: root
   roles:
     - role: standard
-      tags: ['setup']
+      tags: ['std']
     - role: multitor
       tags: ['multitor']
     - role: rfid
