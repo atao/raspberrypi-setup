@@ -54,7 +54,7 @@ sudo multitor -k
 
 # Start multitor processes
 shw_norm "\nStart multitor processes : \n"
-sudo multitor --init 8 --user $USER --socks-port 9000 --control-port 9900 --proxy privoxy --haproxy
+sudo multitor --init 8 --user debian-tor --socks-port 9000 --control-port 9900 --proxy privoxy --haproxy
 
 shw_norm "Bye!\n"
 exit 0
