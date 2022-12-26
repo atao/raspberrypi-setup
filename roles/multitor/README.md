@@ -8,7 +8,7 @@ See issues on project :
 
 Run this :
 
-`sudo chown debian-tor -R /var/lib/multitor`
+`sudo chown debian-tor:debian-tor -R /var/lib/multitor`
 
 ---
 
