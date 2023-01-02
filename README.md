@@ -38,6 +38,11 @@ You can choose what you want to install with tags :
 
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
 
+For Examples you can install only :
+```
+ curl -s https://raw.githubusercontent.com/atao/raspberrypi-setup/main/install.sh | bash -s -- setup,multitor,rfid
+```
+
 --
 
 Inspired from [nico2che / mac-setup](https://github.com/nico2che/mac-setup)
