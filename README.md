@@ -23,7 +23,9 @@ Next run command :
 
 To setup run the following command :
 
-`ansible-playbook playbook.yml -i hosts --ask-pass -u pi -k --tags all`
+```
+ansible-playbook playbook.yml -i hosts --ask-pass -u pi -k --tags all
+```
 
 ## Roles
 
