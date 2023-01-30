@@ -35,7 +35,7 @@ You can choose what you want to install with tags :
 - **jackit** install [jackit](https://github.com/insecurityofthings/jackit) for exploit code for Mousejack
 - **multitor** install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor))
 - **rfid** install RFID tools ([libnfc](https://github.com/nfc-tools/libnfc), [mfoc](https://github.com/nfc-tools/mfoc), [mfcuk](https://github.com/nfc-tools/mfcuk)) and keys from [MifareClassicTool](https://github.com/ikarus23/MifareClassicTool/tree/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files)
-- **wifi** install Wifi tools.
+- **wifi** install Wifi tools and [Bettercap](https://www.bettercap.org)
 - **display** Configure my display with [LCD-show](https://github.com/goodtft/LCD-show)
 
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
