@@ -1,8 +1,9 @@
+---
 - name: Packages installation
-  become: yes
+  become: true
   apt:
     name: "{{ apt_packages }}"
-    update_cache: yes
+    update_cache: true
 
 # - name: Git clone hcxtools
 #   become_user: root
