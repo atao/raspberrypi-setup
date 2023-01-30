@@ -33,3 +33,4 @@
 - name: Install Bettercap
   become_user: root
   shell: go get -u github.com/bettercap/bettercap
+
