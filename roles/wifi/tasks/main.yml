@@ -29,3 +29,7 @@
   shell: make
   args:
     chdir: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
+
+- name: Install Bettercap
+  become_user: root
+  shell: go get -u github.com/bettercap/bettercap
