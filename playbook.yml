@@ -1,4 +1,5 @@
-- hosts: RaspberryPi
+- name: RaspberryPi-Setup
+  hosts: RaspberryPi
   gather_facts: false
   become: true
   become_user: root
