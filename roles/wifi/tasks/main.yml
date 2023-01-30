@@ -4,18 +4,18 @@
     name: "{{ apt_packages }}"
     update_cache: yes
 
-- name: Git clone hcxtools
-  become_user: root
-  git:
-    repo: "https://github.com/ZerBea/hcxtools.git"
-    dest: "/home/{{ lookup('env', 'USER') }}/hcxtools"
-    clone: yes
+# - name: Git clone hcxtools
+#   become_user: root
+#   git:
+#     repo: "https://github.com/ZerBea/hcxtools.git"
+#     dest: "/home/{{ lookup('env', 'USER') }}/hcxtools"
+#     clone: yes
 
-- name: Install hcxtools
-  become_user: root
-  shell: make
-  args:
-    chdir: "/home/{{ lookup('env', 'USER') }}/hcxtools"
+# - name: Install hcxtools
+#   become_user: root
+#   shell: make
+#   args:
+#     chdir: "/home/{{ lookup('env', 'USER') }}/hcxtools"
 
 - name: Git clone hcxtools
   become_user: root
