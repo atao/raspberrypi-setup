@@ -17,18 +17,18 @@
 #   args:
 #     chdir: "/home/{{ lookup('env', 'USER') }}/hcxtools"
 
-- name: Git clone hcxtools
-  become_user: root
-  git:
-    repo: "https://github.com/ZerBea/hcxdumptool.git"
-    dest: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
-    clone: yes
+# - name: Git clone hcxtools
+#   become_user: root
+#   git:
+#     repo: "https://github.com/ZerBea/hcxdumptool.git"
+#     dest: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
+#     clone: yes
 
-- name: Install hcxdumptool
-  become_user: root
-  shell: make
-  args:
-    chdir: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
+# - name: Install hcxdumptool
+#   become_user: root
+#   shell: make
+#   args:
+#     chdir: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
 
 - name: Install Bettercap
   become_user: root
