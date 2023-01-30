@@ -1,9 +1,9 @@
 - name: Packages installation
-  become: yes
+  become: true
   apt:
     name: "{{ apt_packages }}"
-    update_cache: yes
-    autoremove: yes
+    update_cache: true
+    autoremove: true
 
 - name: Install python 3 packages
   pip:

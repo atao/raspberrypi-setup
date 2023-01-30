@@ -1,14 +1,15 @@
+---
 - name: Installation requirements
-  become: yes
+  become: true
   apt:
     name: "{{ apt_packages }}"
-    update_cache: yes
+    update_cache: true
 
 - name: Git clone Polipo
   git:
     repo: https://github.com/jech/polipo.git
     dest: "{{ repo_polipo }}"
-    clone: yes
+    clone: true
 
 - name: Build Polipo
   shell: make
@@ -20,8 +21,8 @@
     src: "{{ repo_polipo }}/polipo"
     dest: /usr/bin/polipo
     mode: '755'
-    force: yes
-    remote_src: yes
+    force: true
+    remote_src: true
 
 - name: Remove Polipo Git folder
   file:
@@ -29,34 +30,34 @@
     state: absent
 
 - name: Install hpts from npm
-  become: yes
+  become: true
   npm:
     name: http-proxy-to-socks
-    global: yes
+    global: true
 
 - name: Git clone multitor
-  become: yes
+  become: true
   git:
     repo: https://github.com/trimstray/multitor.git
     dest: "/home/{{ lookup('env', 'USER') }}/multitor"
-    clone: yes
+    clone: true
 
 - name: Setup multitor
-  become: yes
+  become: true
   command: /home/{{ lookup('env', 'USER') }}/multitor/setup.sh install
 
 - name: Send file - check_multitor.py
-  become: yes
+  become: true
   copy:
     src: scripts/check_multitor.py
     dest: /home/{{ lookup('env', 'USER') }}/check_multitor.py
     mode: '755'
-    force: yes
+    force: true
 
 - name: Send file - run_multitor.sh
-  become: yes
+  become: true
   copy:
     src: scripts/run_multitor.sh
     dest: /home/{{ lookup('env', 'USER') }}/run_multitor.sh
     mode: '755'
-    force: yes
+    force: true
