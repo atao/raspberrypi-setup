@@ -32,4 +32,9 @@
 #     chdir: "/home/{{ lookup('env', 'USER') }}/hcxdumptool"
 
 - name: Install Bettercap
-  shell: go get -u github.com/bettercap/bettercap
+  become_user: root
+  shell: |
+    go get -u github.com/bettercap/bettercap
+    cd go/src/github.com/bettercap/bettercap
+    make build
+    sudo make install
