@@ -38,3 +38,4 @@
     cd go/src/github.com/bettercap/bettercap
     make build
     sudo make install
+    sudo bettercap -eval "caplets.update; ui.update; q"
