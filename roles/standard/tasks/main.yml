@@ -15,4 +15,5 @@
     dest: "/home/{{ lookup('env', 'USER') }}/.vimrc"
     content: |
       set mouse-=a
+      set paste
       syntax enable
