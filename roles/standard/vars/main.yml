@@ -13,6 +13,7 @@ apt_packages:
   - mc
   - youtube-dl
   - dnsutils
+  - traceroute
 
 pip_packages:
   - requests
