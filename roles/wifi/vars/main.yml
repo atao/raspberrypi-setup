@@ -8,3 +8,5 @@ apt_packages:
   - pkg-config
   - hcxtools
   - hcxdumptool
+  - gpsd
+  - gpsd-tools
