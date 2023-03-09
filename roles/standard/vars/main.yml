@@ -12,6 +12,7 @@ apt_packages:
   - iptraf
   - mc
   - youtube-dl
+  - dnsutils
 
 pip_packages:
   - requests
