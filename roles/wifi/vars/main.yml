@@ -10,3 +10,5 @@ apt_packages:
   - hcxdumptool
   - gpsd
   - gpsd-tools
+  - gpsd-clients
+  - python3-gps
