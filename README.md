@@ -2,12 +2,9 @@
 
 [![YAML Lint](https://github.com/atao/raspberrypi-setup/actions/workflows/main.yml/badge.svg)](https://github.com/atao/raspberrypi-setup/actions/workflows/main.yml)
 
-This is an [Ansible](https://www.ansible.com/) playbook to quickly setup my Raspberry Pi.
-Work with (B, B+, 2B, 3B, 3B+, 4B, Zero W, Zero 2W, 400)
+This [Ansible](https://www.ansible.com/) playbook is designed to rapidly set up your Raspberry Pi.
 
-It should be working well on Debian distribution and Debian based distributions.
-
-Successfully tested with Pi Zero W, Pi Zero 2W and Pi 4B.
+It's compatible with all models. It has been successfully tested on multiple models, including the Pi Zero W, Pi Zero 2W, and Pi 4B, among others. The playbook should work well on both Debian and Debian-based distributions.
 
 ## Standalone
 
