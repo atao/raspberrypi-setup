@@ -24,3 +24,17 @@
          conversion/mct2dmp%20-%20bash%20version/mct2dmp.sh"
     dest: /home/{{ lookup('env', 'USER') }}/mct2dmp.sh
     force: true
+
+- name: Download 4B_Converter from ClassicConverter
+  get_url:
+    url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
+         main/4B_Converter.py"
+    dest: /home/{{ lookup('env', 'USER') }}/4B_Converter.py
+    force: true
+
+- name: Download 7B_Converter from ClassicConverter
+  get_url:
+    url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
+         main/7B_Converter.py"
+    dest: /home/{{ lookup('env', 'USER') }}/7B_Converter.py
+    force: true
