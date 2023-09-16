@@ -1,7 +1,7 @@
 - name: Git clone jackit
   become: true
   become_user: root
-  git:
+  ansible.builtin.git:
     repo: https://github.com/insecurityofthings/jackit.git
     dest: /home/{{ lookup('env', 'USER') }}/jackit
     clone: true
@@ -9,7 +9,7 @@
 - name: Install requirements
   become: true
   become_user: root
-  pip:
+  ansible.builtin.pip:
     requirements: /home/{{ lookup('env', 'USER') }}/jackit/requirements.txt
     executable: pip3
 

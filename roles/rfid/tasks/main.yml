@@ -1,39 +1,39 @@
 - name: Packages installation
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ apt_packages }}"
     update_cache: true
 
 - name: Download std.keys from MifareClassicTool
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
          Mifare%20Classic%20Tool/app/src/main/assets/key-files/std.keys"
     dest: /home/{{ lookup('env', 'USER') }}/std.keys
     force: true
 
 - name: Download extended-std.keys from MifareClassicTool
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
          Mifare%20Classic%20Tool/app/src/main/assets/key-files/extended-std.keys"
     dest: /home/{{ lookup('env', 'USER') }}/extended-std.keys
     force: true
 
 - name: Download mct2dmp from bm-mifare-classic
-  get_url:
+  ansible.builtin.get_url:
     url: "https://github.com/blogmotion/bm-mifare-classic/raw/master/\
          conversion/mct2dmp%20-%20bash%20version/mct2dmp.sh"
     dest: /home/{{ lookup('env', 'USER') }}/mct2dmp.sh
     force: true
 
 - name: Download 4B_Converter from ClassicConverter
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
          main/4B_Converter.py"
     dest: /home/{{ lookup('env', 'USER') }}/4B_Converter.py
     force: true
 
 - name: Download 7B_Converter from ClassicConverter
-  get_url:
+  ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
          main/7B_Converter.py"
     dest: /home/{{ lookup('env', 'USER') }}/7B_Converter.py

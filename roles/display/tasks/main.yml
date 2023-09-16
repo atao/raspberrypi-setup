@@ -1,15 +1,15 @@
 - name: Git clone LCD-show
   become: true
   become_user: root
-  git:
+  ansible.builtin.git:
     repo: https://github.com/goodtft/LCD-show.git
     dest: /home/{{ lookup('env', 'USER') }}/LCD-show
     clone: true
 - name: Change rights on LCD-show
-  shell: chmod -R 755 LCD-show
+  ansible.builtin.shell: chmod -R 755 LCD-show
   args:
     chdir: /home/{{ lookup('env', 'USER') }}/
 - name: Run script to configure screen
-  shell: sudo ./LCD7B-show
+  ansible.builtin.shell: sudo ./LCD7B-show
   args:
     chdir: /home/{{ lookup('env', 'USER') }}/LCD-show

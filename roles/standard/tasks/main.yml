@@ -1,17 +1,17 @@
 - name: Packages installation
   become: true
-  apt:
+  ansible.builtin.apt:
     name: "{{ apt_packages }}"
     update_cache: true
     autoremove: true
 
 - name: Install python 3 packages
-  pip:
+  ansible.builtin.pip:
     name: "{{ pip_packages }}"
     executable: pip3
 
 - name: Vim config file
-  copy:
+  ansible.builtin.copy:
     dest: "/home/{{ lookup('env', 'USER') }}/.vimrc"
     content: |
       set mouse-=a
