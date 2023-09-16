@@ -44,7 +44,8 @@
 
 - name: Setup multitor
   become: true
-  ansible.builtin.command: /home/{{ lookup('env', 'USER') }}/multitor/setup.sh install
+  ansible.builtin.command: >-
+    /home/{{ lookup('env', 'USER') }}/multitor/setup.sh install
 
 - name: Send file - check_multitor.py
   become: true
