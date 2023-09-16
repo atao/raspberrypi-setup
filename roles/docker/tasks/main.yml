@@ -1,0 +1,29 @@
+- name: Uninstall all conflicting packages with Docker
+  ansible.builtin.apt:
+    name: "{{ old_packages }}"
+    state: absent
+
+- name: Install the Docker packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ apt_packages }}"
+    update_cache: true
+
+- name: Add folder keyrings
+  ansible.builtin.shell: sudo install -m 0755 -d /etc/apt/keyrings
+
+- name: Add gpg key for Docker repository
+  ansible.builtin.shell: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+- name: Set rights key file
+  ansible.builtin.shell: sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+- name: Add Docker repository
+  ansible.builtin.shell: echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+- name: Install the Docker packages
+  become: true
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    update_cache: true
+

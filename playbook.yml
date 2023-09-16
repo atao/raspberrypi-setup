@@ -6,6 +6,8 @@
   roles:
     - role: standard
       tags: ['setup']
+    - role: docker
+      tags: ['docker']
     - role: multitor
       tags: ['multitor']
     - role: rfid
