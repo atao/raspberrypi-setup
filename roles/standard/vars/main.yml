@@ -3,6 +3,8 @@ apt_packages:
   - htop
   - vim
   - git
+  - tree
+  - locate
   - nmap
   - sqlmap
   - proxychains
