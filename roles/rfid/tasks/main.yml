@@ -10,6 +10,8 @@
          Mifare%20Classic%20Tool/app/src/main/assets/key-files/std.keys"
     dest: /home/{{ lookup('env', 'USER') }}/std.keys
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
 
 - name: Download extended-std.keys from MifareClassicTool
   ansible.builtin.get_url:
@@ -17,6 +19,8 @@
          Mifare%20Classic%20Tool/app/src/main/assets/key-files/extended-std.keys"
     dest: /home/{{ lookup('env', 'USER') }}/extended-std.keys
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
 
 - name: Download mct2dmp from bm-mifare-classic
   ansible.builtin.get_url:
@@ -24,6 +28,8 @@
          conversion/mct2dmp%20-%20bash%20version/mct2dmp.sh"
     dest: /home/{{ lookup('env', 'USER') }}/mct2dmp.sh
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
 
 - name: Download 4B_Converter from ClassicConverter
   ansible.builtin.get_url:
@@ -31,6 +37,8 @@
          main/4B_Converter.py"
     dest: /home/{{ lookup('env', 'USER') }}/4B_Converter.py
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
 
 - name: Download 7B_Converter from ClassicConverter
   ansible.builtin.get_url:
@@ -38,3 +46,5 @@
          main/7B_Converter.py"
     dest: /home/{{ lookup('env', 'USER') }}/7B_Converter.py
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
