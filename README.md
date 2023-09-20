@@ -51,7 +51,11 @@ Run with option :
 ```
 --syntax-check
 ```
-
+If you test it in WSL run this command before :
+```
+sudo rm /usr/lib/python3.11/EXTERNALLY-MANAGED
+sudo apt install curl
+```
 --
 
 Inspired from [nico2che / mac-setup](https://github.com/nico2che/mac-setup)
