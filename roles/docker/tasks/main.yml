@@ -15,7 +15,7 @@
 - name: Add gpg key for Docker repository
   ansible.builtin.shell: >-
     curl -fsSL https://download.docker.com/linux/debian/gpg |
-    sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
 
 - name: Set rights key file
   ansible.builtin.shell: sudo chmod a+r /etc/apt/keyrings/docker.gpg
