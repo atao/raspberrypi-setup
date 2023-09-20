@@ -54,6 +54,8 @@
     dest: /home/{{ lookup('env', 'USER') }}/check_multitor.py
     mode: '755'
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
 
 - name: Send file - run_multitor.sh
   become: true
@@ -62,3 +64,5 @@
     dest: /home/{{ lookup('env', 'USER') }}/run_multitor.sh
     mode: '755'
     force: true
+    owner: "{{ lookup('env', 'USER') }}"
+    group: "{{ lookup('env', 'USER') }}"
