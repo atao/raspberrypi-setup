@@ -21,7 +21,9 @@ Next run command :
 To setup run the following command :
 
 ```
-ansible-playbook playbook.yml -i hosts --ask-pass -u pi -k --tags all
+git clone https://github.com/atao/raspberrypi-setup.git
+cd raspberrypi-setup
+ansible-playbook playbook.yml -i hosts --tags all
 ```
 
 ## Roles
