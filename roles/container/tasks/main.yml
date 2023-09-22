@@ -1,0 +1,14 @@
+- name: Container jlesage/jdownloader-2
+  community.docker.docker_container:
+    name: jdownloader-2
+    image: jlesage/jdownloader-2
+    state: present
+    recreate: false
+    pull: true
+    detach: true
+    auto_remove: true
+    ports:
+      - "5800:5800"
+    volumes:
+      - /home/{{ lookup('env', 'USER') }}/jdownloader:/config
+      - /mnt:/output
