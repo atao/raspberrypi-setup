@@ -10,18 +10,18 @@
     update_cache: true
 
 - name: Add folder keyrings
-  ansible.builtin.shell: sudo install -m 0755 -d /etc/apt/keyrings
+  ansible.builtin.command: sudo install -m 0755 -d /etc/apt/keyrings
 
 - name: Add gpg key for Docker repository
-  ansible.builtin.shell: >-
+  ansible.builtin.command: >-
     curl -fsSL https://download.docker.com/linux/debian/gpg |
     sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
 
 - name: Set rights key file
-  ansible.builtin.shell: sudo chmod a+r /etc/apt/keyrings/docker.gpg
+  ansible.builtin.command: sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
 - name: Add Docker repository
-  ansible.builtin.shell: >-
+  ansible.builtin.command: >-
     echo "deb [arch="$(dpkg --print-architecture)"
     signed-by=/etc/apt/keyrings/docker.gpg]
     https://download.docker.com/linux/debian
@@ -41,7 +41,7 @@
     state: present
     recreate: true
     ports:
-     - "5800:5800"
+      - "5800:5800"
     volumes:
       - /home/{{ lookup('env', 'USER') }}/jdownloader:/config
       - /home/{{ lookup('env', 'USER') }}:/output

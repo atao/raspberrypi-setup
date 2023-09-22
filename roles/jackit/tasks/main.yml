@@ -16,6 +16,6 @@
 - name: Install jackit
   become: true
   become_user: root
-  ansible.builtin.shell: python3 setup.py install
+  ansible.builtin.command: python3 setup.py install
   args:
     chdir: /home/{{ lookup('env', 'USER') }}/jackit/

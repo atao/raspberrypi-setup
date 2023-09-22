@@ -12,7 +12,7 @@
     clone: true
 
 - name: Build Polipo
-  ansible.builtin.shell: make
+  ansible.builtin.command: make
   args:
     chdir: "{{ repo_polipo }}"
 
