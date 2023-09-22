@@ -2,7 +2,7 @@
   community.docker.docker_container:
     name: jdownloader-2
     image: jlesage/jdownloader-2
-    state: present
+    state: started
     recreate: false
     pull: true
     detach: true
