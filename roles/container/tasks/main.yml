@@ -1,11 +1,11 @@
 - name: Container portainer/portainer-ce:latest
   block:
-  - name: Create a volume
-    become: true
-    community.docker.docker_volume:
+   - name: Create a volume
+     become: true
+     community.docker.docker_volume:
       name: portainer_data
-  - name: Create container
-    community.docker.docker_container:
+   - name: Create container
+     community.docker.docker_container:
       name: portainer
       image: portainer/portainer-ce
       state: started
@@ -14,25 +14,25 @@
       detach: true
       restart_policy: "always"
       ports:
-        - "8000:8000"
-        - "9443:9443"
+       - "8000:8000"
+       - "9443:9443"
       volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - portainer_data:/data
+       - /var/run/docker.sock:/var/run/docker.sock
+       - portainer_data:/data
 
 - name: Container jlesage/jdownloader-2
   community.docker.docker_container:
-    name: jdownloader-2
-    image: jlesage/jdownloader-2
-    state: started
-    recreate: false
-    pull: true
-    detach: true
-    auto_remove: true
-    ports:
-      - "5800:5800"
-    volumes:
-      - /home/{{ lookup('env', 'USER') }}/jdownloader:/config
-      - /mnt:/output
-    env:
-        "JDOWNLOADER_HEADLESS": "1"
+   name: jdownloader-2
+   image: jlesage/jdownloader-2
+   state: started
+   recreate: false
+   pull: true
+   detach: true
+   auto_remove: true
+   ports:
+    - "5800:5800"
+   volumes:
+    - /home/{{ lookup('env', 'USER') }}/jdownloader:/config
+    - /mnt:/output
+   env:
+    "JDOWNLOADER_HEADLESS": "1"
