@@ -33,3 +33,15 @@
   ansible.builtin.apt:
     name: "{{ docker_packages }}"
     update_cache: true
+
+- name: Run container jlesage/jdownloader-2
+  community.docker.docker_container:
+    name: jdownloader-2
+    image: jlesage/jdownloader-2
+    state: present
+    recreate: true
+    ports:
+     - "5800:5800"
+    volumes:
+      - /home/{{ lookup('env', 'USER') }}/jdownloader:/config
+      - /home/{{ lookup('env', 'USER') }}:/output
