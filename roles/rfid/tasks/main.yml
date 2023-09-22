@@ -12,6 +12,7 @@
     force: true
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
+    mode: '644'
 
 - name: Download extended-std.keys from MifareClassicTool
   ansible.builtin.get_url:
@@ -21,6 +22,7 @@
     force: true
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
+    mode: '644'
 
 - name: Download mct2dmp from bm-mifare-classic
   ansible.builtin.get_url:
@@ -30,6 +32,7 @@
     force: true
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
+    mode: '644'
 
 - name: Download 4B_Converter from ClassicConverter
   ansible.builtin.get_url:
@@ -39,6 +42,7 @@
     force: true
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
+    mode: '644'
 
 - name: Download 7B_Converter from ClassicConverter
   ansible.builtin.get_url:
@@ -48,3 +52,4 @@
     force: true
     owner: "{{ lookup('env', 'USER') }}"
     group: "{{ lookup('env', 'USER') }}"
+    mode: '644'

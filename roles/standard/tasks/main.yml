@@ -17,3 +17,4 @@
       set mouse-=a
       set paste
       syntax enable
+    mode: "644"
