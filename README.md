@@ -23,7 +23,7 @@ To setup run the following command :
 ```
 git clone https://github.com/atao/raspberrypi-setup.git
 cd raspberrypi-setup
-ansible-playbook playbook.yml -i hosts --tags all
+ansible-playbook playbook.yml -i hosts --ask-become-pass --tags all
 ```
 
 ## Roles
