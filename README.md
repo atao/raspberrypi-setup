@@ -37,6 +37,7 @@ You can choose what you want to install with tags :
 - **wifi** install Wifi and GPS tools for wardriving
 - **display** configure my display with [LCD-show](https://github.com/goodtft/LCD-show)
 - **docker** install Docker
+- **container** some containers ([jlesage/jdownloader-2](https://github.com/jlesage/docker-jdownloader-2))
 
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
 
