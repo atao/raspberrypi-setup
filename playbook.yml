@@ -19,4 +19,4 @@
     - role: display
       tags: ['display', 'never']
     - role: container
-      tags: ['container']
+      tags: ['docker', 'container']
