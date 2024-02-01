@@ -10,15 +10,15 @@
     name: "{{ apt_packages }}"
     update_cache: true
 
-- name: check install script exists
+- name: Check install script exists
   ansible.builtin.stat:
     path: get-docker.sh
   register: stat_result
 
 - name: Download docker install script
   ansible.builtin.get_url:
-        url: https://get.docker.com
-        dest: get-docker.sh
+    url: https://get.docker.com
+    dest: get-docker.sh
   when: stat_result.stat.exists
 
 - name: Run install script
@@ -31,7 +31,9 @@
 - name: Verify docker installation
   command: docker -v
   register: docker_version
-- debug:
+
+- name: Docker version
+  debug:
     var: docker_version.stdout_lines
 
 - name: Remove script

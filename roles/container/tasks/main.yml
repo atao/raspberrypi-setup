@@ -1,12 +1,13 @@
 - name: Container portainer/portainer-ce:latest
-  become: true
-  become_user: root
   block:
    - name: Create a volume portainer_data
      become: true
+     become_user: root
      community.docker.docker_volume:
       name: portainer_data
    - name: Create container portainer-ce
+     become: true
+     become_user: root
      community.docker.docker_container:
       name: portainer
       image: portainer/portainer-ce
