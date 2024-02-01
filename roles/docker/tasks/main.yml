@@ -3,33 +3,38 @@
     name: "{{ old_packages }}"
     state: absent
 
-- name: Install the Docker packages
+- name: Install Docker packages
   become: true
+  become_user: root
   ansible.builtin.apt:
     name: "{{ apt_packages }}"
     update_cache: true
 
-- name: Add folder keyrings
-  ansible.builtin.command: sudo install -m 0755 -d /etc/apt/keyrings
+- name: check install script exists
+  ansible.builtin.stat:
+    path: get-docker.sh
+  register: stat_result
 
-- name: Add gpg key for Docker repository
-  ansible.builtin.command: >-
-    curl -fsSL https://download.docker.com/linux/debian/gpg |
-    sudo gpg --batch --yes --dearmor -o /etc/apt/keyrings/docker.gpg
+- name: Download docker install script
+  ansible.builtin.get_url:
+        url: https://get.docker.com
+        dest: get-docker.sh
+  when: stat_result.stat.exists
 
-- name: Set rights key file
-  ansible.builtin.command: sudo chmod a+r /etc/apt/keyrings/docker.gpg
+- name: Run install script
+  ansible.builtin.command:
+    argv:
+      - sh
+      - get-docker.sh
+  when: stat_result.stat.exists
 
-- name: Add Docker repository
-  ansible.builtin.command: >-
-    echo "deb [arch="$(dpkg --print-architecture)"
-    signed-by=/etc/apt/keyrings/docker.gpg]
-    https://download.docker.com/linux/debian
-    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+- name: Verify docker installation
+  command: docker -v
+  register: docker_version
+- debug:
+    var: docker_version.stdout_lines
 
-- name: Install the Docker packages
-  become: true
-  ansible.builtin.apt:
-    name: "{{ docker_packages }}"
-    update_cache: true
+- name: Remove script
+  file:
+    path: get-docker.sh
+    state: absent

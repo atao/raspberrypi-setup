@@ -1,6 +1,7 @@
 ---
 - name: Packages installation
   become: true
+  become_user: root
   ansible.builtin.apt:
     name: "{{ apt_packages }}"
     update_cache: true

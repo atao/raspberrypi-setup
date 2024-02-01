@@ -16,7 +16,4 @@ apt_packages:
   - youtube-dl
   - dnsutils
   - traceroute
-
-pip_packages:
-  - requests
-  - lxml
+  - ansible-lint

@@ -5,6 +5,4 @@ apt_packages:
   - tor
   - privoxy
   - haproxy
-  - netcat
-
-repo_polipo: "$PWD/polipo"
+  - netcat-openbsd

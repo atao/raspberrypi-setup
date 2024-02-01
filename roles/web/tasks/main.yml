@@ -1,0 +1,19 @@
+- name: Packages installation
+  become: true
+  become_user: root
+  ansible.builtin.apt:
+    name: "{{ apt_packages }}"
+    update_cache: true
+    autoremove: true
+
+- name: Install certbot
+  community.general.snap:
+    name: certbot
+    classic: true
+
+- name: Link certbot
+  ansible.builtin.file:
+    src: /snap/bin/certbot
+    dest: /usr/bin/certbot
+    state: link
+    force: true

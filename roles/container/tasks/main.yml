@@ -1,10 +1,12 @@
 - name: Container portainer/portainer-ce:latest
+  become: true
+  become_user: root
   block:
-   - name: Create a volume
+   - name: Create a volume portainer_data
      become: true
      community.docker.docker_volume:
       name: portainer_data
-   - name: Create container
+   - name: Create container portainer-ce
      community.docker.docker_container:
       name: portainer
       image: portainer/portainer-ce
@@ -19,8 +21,11 @@
       volumes:
        - /var/run/docker.sock:/var/run/docker.sock
        - portainer_data:/data
+  tags: portainer
 
 - name: Container jlesage/jdownloader-2
+  become: true
+  become_user: root
   community.docker.docker_container:
    name: jdownloader-2
    image: jlesage/jdownloader-2
@@ -32,7 +37,8 @@
    ports:
     - "5800:5800"
    volumes:
-    - /home/{{ lookup('env', 'USER') }}/jdownloader:/config
+    - "{{ ansible_facts['env']['HOME'] }}/jdownloader:/config"
     - /mnt:/output
    env:
     "JDOWNLOADER_HEADLESS": "1"
+  tags: jd2

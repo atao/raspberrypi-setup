@@ -1,11 +1,11 @@
 - name: RaspberryPi-Setup
   hosts: RaspberryPi
-  gather_facts: false
+  gather_facts: true
   become: true
-  become_user: root
+  become_user: atao
   roles:
     - role: standard
-      tags: ['setup']
+      tags: ['standard']
     - role: docker
       tags: ['docker']
     - role: multitor
@@ -19,4 +19,5 @@
     - role: display
       tags: ['display', 'never']
     - role: container
-      tags: ['docker', 'container']
+    - role: web
+      tags: ['web']

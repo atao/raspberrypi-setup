@@ -1,5 +1,6 @@
 - name: Packages installation
   become: true
+  become_user: root
   ansible.builtin.apt:
     name: "{{ apt_packages }}"
     update_cache: true
@@ -8,48 +9,48 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
          Mifare%20Classic%20Tool/app/src/main/assets/key-files/std.keys"
-    dest: /home/{{ lookup('env', 'USER') }}/std.keys
+    dest: "{{ ansible_facts['env']['HOME'] }}/std.keys"
     force: true
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
 
 - name: Download extended-std.keys from MifareClassicTool
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/ikarus23/MifareClassicTool/master/\
          Mifare%20Classic%20Tool/app/src/main/assets/key-files/extended-std.keys"
-    dest: /home/{{ lookup('env', 'USER') }}/extended-std.keys
+    dest: "{{ ansible_facts['env']['HOME'] }}/extended-std.keys"
     force: true
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
 
 - name: Download mct2dmp from bm-mifare-classic
   ansible.builtin.get_url:
     url: "https://github.com/blogmotion/bm-mifare-classic/raw/master/\
          conversion/mct2dmp%20-%20bash%20version/mct2dmp.sh"
-    dest: /home/{{ lookup('env', 'USER') }}/mct2dmp.sh
+    dest: "{{ ansible_facts['env']['HOME'] }}/mct2dmp.sh"
     force: true
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
 
 - name: Download 4B_Converter from ClassicConverter
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
          main/4B_Converter.py"
-    dest: /home/{{ lookup('env', 'USER') }}/4B_Converter.py
+    dest: "{{ ansible_facts['env']['HOME'] }}/4B_Converter.py"
     force: true
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
 
 - name: Download 7B_Converter from ClassicConverter
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
          main/7B_Converter.py"
-    dest: /home/{{ lookup('env', 'USER') }}/7B_Converter.py
+    dest: "{{ ansible_facts['env']['HOME'] }}/7B_Converter.py"
     force: true
-    owner: "{{ lookup('env', 'USER') }}"
-    group: "{{ lookup('env', 'USER') }}"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
