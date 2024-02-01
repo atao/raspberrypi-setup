@@ -1,3 +1,4 @@
+---
 - name: Packages installation
   become: true
   become_user: root

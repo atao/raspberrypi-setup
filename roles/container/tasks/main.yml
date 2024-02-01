@@ -1,3 +1,4 @@
+---
 - name: Container portainer/portainer-ce:latest
   block:
    - name: Create a volume portainer_data

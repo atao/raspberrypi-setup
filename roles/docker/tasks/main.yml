@@ -1,3 +1,4 @@
+---
 - name: Uninstall all conflicting packages with Docker
   ansible.builtin.apt:
     name: "{{ old_packages }}"
