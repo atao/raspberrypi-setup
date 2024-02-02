@@ -8,6 +8,7 @@ apt_packages:
   - locate
   - nmap
   - sqlmap
+  - tor
   - proxychains
   - python3-lxml
   - python3-pip
