@@ -7,12 +7,17 @@
     update_cache: true
     autoremove: true
 
+- name: Check certbot
+  ansible.builtin.command: certbot --version
+  register: certbot_version
+
 - name: Install certbot
   become: true
   become_user: root
   community.general.snap:
     name: certbot
     classic: true
+  when: certbot_version.rc == 127
 
 - name: Link certbot
   become: true
@@ -22,3 +27,4 @@
     dest: /usr/bin/certbot
     state: link
     force: true
+  when: certbot_version.rc == 127
