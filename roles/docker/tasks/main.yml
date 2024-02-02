@@ -20,14 +20,14 @@
   ansible.builtin.get_url:
     url: https://get.docker.com
     dest: get-docker.sh
-  when: stat_result.stat.exists
+  when: not stat_result.stat.exists
 
 - name: Run install script
   ansible.builtin.command:
     argv:
       - sh
       - get-docker.sh
-  when: stat_result.stat.exists
+  when: not stat_result.stat.exists
 
 - name: Verify docker installation
   command: docker -v
