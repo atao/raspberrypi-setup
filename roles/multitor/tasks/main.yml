@@ -23,6 +23,8 @@
     state: absent
 
 - name: Install hpts from npm
+  become: true
+  become_user: root
   community.general.npm:
     name: http-proxy-to-socks
     global: true
