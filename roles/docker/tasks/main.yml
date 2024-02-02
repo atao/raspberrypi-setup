@@ -11,23 +11,16 @@
     name: "{{ apt_packages }}"
     update_cache: true
 
-- name: Check install script exists
-  ansible.builtin.stat:
-    path: get-docker.sh
-  register: stat_result
-
 - name: Download docker install script
   ansible.builtin.get_url:
     url: https://get.docker.com
-    dest: get-docker.sh
-  when: not stat_result.stat.exists
+    dest: "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
 
 - name: Run install script
   ansible.builtin.command:
     argv:
       - sh
-      - get-docker.sh
-  when: not stat_result.stat.exists
+      - "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
 
 - name: Verify docker installation
   command: docker -v
@@ -39,5 +32,5 @@
 
 - name: Remove script
   file:
-    path: get-docker.sh
+    path: "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
     state: absent
