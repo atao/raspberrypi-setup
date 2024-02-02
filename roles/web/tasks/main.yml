@@ -8,11 +8,15 @@
     autoremove: true
 
 - name: Install certbot
+  become: true
+  become_user: root
   community.general.snap:
     name: certbot
     classic: true
 
 - name: Link certbot
+  become: true
+  become_user: root
   ansible.builtin.file:
     src: /snap/bin/certbot
     dest: /usr/bin/certbot
