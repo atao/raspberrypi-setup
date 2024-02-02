@@ -1,8 +1,13 @@
 ---
+- name: Verify docker installation
+  command: docker -v
+  register: docker_version
+
 - name: Uninstall all conflicting packages with Docker
   ansible.builtin.apt:
     name: "{{ old_packages }}"
     state: absent
+  when: docker_version.rc == 127
 
 - name: Install Docker packages
   become: true
@@ -10,17 +15,20 @@
   ansible.builtin.apt:
     name: "{{ apt_packages }}"
     update_cache: true
+  when: docker_version.rc == 127
 
 - name: Download docker install script
   ansible.builtin.get_url:
     url: https://get.docker.com
     dest: "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
+  when: docker_version.rc == 127
 
 - name: Run install script
   ansible.builtin.command:
     argv:
       - sh
       - "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
+  when: docker_version.rc == 127
 
 - name: Verify docker installation
   command: docker -v
