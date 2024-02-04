@@ -31,7 +31,7 @@
     url: "https://github.com/blogmotion/bm-mifare-classic/raw/master/\
          conversion/mct2dmp%20-%20bash%20version/mct2dmp.sh"
     dest: "{{ ansible_facts['env']['HOME'] }}/mct2dmp.sh"
-    force: true
+    force: false
     owner: "{{ ansible_facts['env']['LOGNAME'] }}"
     group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
@@ -41,7 +41,7 @@
     url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
          main/4B_Converter.py"
     dest: "{{ ansible_facts['env']['HOME'] }}/4B_Converter.py"
-    force: true
+    force: false
     owner: "{{ ansible_facts['env']['LOGNAME'] }}"
     group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
@@ -51,7 +51,7 @@
     url: "https://raw.githubusercontent.com/equipter/ClassicConverter/\
          main/7B_Converter.py"
     dest: "{{ ansible_facts['env']['HOME'] }}/7B_Converter.py"
-    force: true
+    force: false
     owner: "{{ ansible_facts['env']['LOGNAME'] }}"
     group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '644'
