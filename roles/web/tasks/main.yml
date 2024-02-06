@@ -9,7 +9,7 @@
 
 - name: Check if certbot already installed
   ansible.builtin.stat:
-      path: /snap/bin/certbot
+    path: "/snap/bin/certbot"
   register: certbot
 
 - name: Install certbot

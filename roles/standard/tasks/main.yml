@@ -9,7 +9,7 @@
 
 - name: Check if .vimrc exists
   ansible.builtin.stat:
-      path: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
+    path: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
   register: vimrc
 
 - name: Configure .vimrc
