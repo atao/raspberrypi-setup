@@ -1,0 +1,17 @@
+---
+- name: Installation packages
+  become: true
+  become_user: root
+  ansible.builtin.apt:
+    name: "{{ apt_packages }}"
+    update_cache: true
+
+- name: Download script check_tor.py
+  ansible.builtin.get_url:
+    url: "https://gist.githubusercontent.com/atao/e5bdee72501b94d3aa9ddf9b5399792f/\
+          raw/d6beebe73b656ee8ef38f9f981225e67fe359173/check_tor.py"
+    dest: "{{ ansible_facts['env']['HOME'] }}/check_tor.py"
+    force: false
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
+    mode: '0644'

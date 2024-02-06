@@ -7,11 +7,30 @@
     update_cache: true
     autoremove: true
 
-- name: Vim config file
-  ansible.builtin.copy:
-    dest: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
-    content: |
+- name: Check if .vimrc exists
+  ansible.builtin.stat:
+      path: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
+  register: vimrc
+
+- name: Configure .vimrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
+    line: |
+      syntax enable
       set mouse-=a
       set paste
-      syntax enable
-    mode: "644"
+    create: true
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
+    mode: '0644'
+  when: not vimrc.stat.exists
+
+- name: Enable ll alias in .bashrc
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
+    regexp: '^#alias ll'
+    line: alias ll='ls -l'
+
+- name: Print a debug message
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts['env']['HOME'] }}/.bashrc"

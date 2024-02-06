@@ -7,9 +7,10 @@
     update_cache: true
     autoremove: true
 
-- name: Check certbot
-  ansible.builtin.command: certbot --version
-  register: certbot_version
+- name: Check if certbot already installed
+  ansible.builtin.stat:
+      path: /snap/bin/certbot
+  register: certbot
 
 - name: Install certbot
   become: true
@@ -17,7 +18,7 @@
   community.general.snap:
     name: certbot
     classic: true
-  when: certbot_version.rc == 127
+  when: not certbot.stat.exists
 
 - name: Link certbot
   become: true
@@ -27,4 +28,4 @@
     dest: /usr/bin/certbot
     state: link
     force: true
-  when: certbot_version.rc == 127
+  when: not certbot.stat.exists

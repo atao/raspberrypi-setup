@@ -30,14 +30,15 @@ ansible-playbook playbook.yml -i hosts --tags all --ask-become-pass
 
 You can choose what you want to install with tags :
 
-- **standard** install [standard packages](roles/standard/vars/main.yml)
-- **jackit** install [jackit](https://github.com/insecurityofthings/jackit) for exploit code for Mousejack
-- **multitor** install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor)) -- [Known issues](https://github.com/atao/raspberrypi-setup/blob/main/roles/multitor/README.md)
-- **rfid** install RFID tools ([libnfc](https://github.com/nfc-tools/libnfc), [mfoc](https://github.com/nfc-tools/mfoc), [mfcuk](https://github.com/nfc-tools/mfcuk)) and keys from [MifareClassicTool](https://github.com/ikarus23/MifareClassicTool/tree/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files)
-- **wifi** install Wifi and GPS tools for wardriving
-- **docker** install Docker
-- **web** install nginx and certbot
+- **standard** install [standard packages](roles/standard/vars/main.yml), configure .bashrc, .vimrc
 - **display** configure my display with [LCD-show](https://github.com/goodtft/LCD-show)
+- **docker** install Docker
+- **jackit** install [jackit](https://github.com/insecurityofthings/jackit) for exploit code for Mousejack
+- ~~**multitor** install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor)) -- [Known issues](https://github.com/atao/raspberrypi-setup/blob/main/roles/multitor/README.md)~~
+- **proxy** install Tor and proxy tools.
+- **rfid** install RFID tools ([libnfc](https://github.com/nfc-tools/libnfc), [mfoc](https://github.com/nfc-tools/mfoc), [mfcuk](https://github.com/nfc-tools/mfcuk)) and keys from [MifareClassicTool](https://github.com/ikarus23/MifareClassicTool/tree/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files)
+- **web** install nginx and certbot
+- **wifi** install Wifi and GPS tools for wardriving
 
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
 
@@ -47,9 +48,9 @@ Containers :
 
 
 ## Examples
-Install only standard, multitor, rfid, docker, web :
+Install only standard, proxy, rfid, docker, web :
 ```
-curl -s https://raw.githubusercontent.com/atao/raspberrypi-setup/main/install.sh | bash -s -- standard,multitor,rfid,docker,web
+curl -s https://raw.githubusercontent.com/atao/raspberrypi-setup/main/install.sh | bash -s -- standard,proxy,rfid,docker,web,jd2
 ```
 
 ## Debug

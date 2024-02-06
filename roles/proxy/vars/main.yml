@@ -1,0 +1,6 @@
+---
+apt_packages:
+  - tor
+  - proxychains
+  - python3-socks
+  - netcat-openbsd

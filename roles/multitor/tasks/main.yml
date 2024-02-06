@@ -6,22 +6,6 @@
     name: "{{ apt_packages }}"
     update_cache: true
 
-- name: Git clone Polipo
-  ansible.builtin.git:
-    repo: https://github.com/jech/polipo.git
-    dest: "{{ ansible_facts['env']['HOME'] }}/polipo"
-    clone: true
-
-- name: Build Polipo
-  ansible.builtin.command: make
-  args:
-    chdir: "{{ ansible_facts['env']['HOME'] }}/polipo"
-
-- name: Remove Polipo Git folder
-  file:
-    path: "{{ ansible_facts['env']['HOME'] }}/polipo"
-    state: absent
-
 - name: Install hpts from npm
   become: true
   become_user: root
@@ -36,8 +20,11 @@
     clone: true
 
 - name: Setup multitor
-  ansible.builtin.command: >-
-    {{ ansible_facts['env']['HOME'] }}/multitor/setup.sh install
+  ansible.builtin.command:
+    argv:
+      - sudo
+      - "{{ ansible_facts['env']['HOME'] }}/multitor/setup.sh"
+      - install
 
 - name: Send file - check_multitor.py
   ansible.builtin.copy:

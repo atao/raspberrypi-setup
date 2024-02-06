@@ -22,6 +22,9 @@
   ansible.builtin.get_url:
     url: https://get.docker.com
     dest: "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
+    mode: '0644'
   when: not docker_exist.stat.exists
 
 - name: Run install script

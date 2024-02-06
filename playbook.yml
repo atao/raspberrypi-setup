@@ -4,20 +4,20 @@
   become: true
   become_user: atao
   roles:
-    - role: standard
-      tags: ['standard']
-    - role: docker
-      tags: ['docker']
-    - role: multitor
-      tags: ['multitor']
-    - role: rfid
-      tags: ['rfid']
-    - role: jackit
-      tags: ['jackit']
-    - role: wifi
-      tags: ['wifi']
+    - role: container
     - role: display
       tags: ['display', 'never']
-    - role: container
+    - role: docker
+      tags: ['docker']
+    - role: jackit
+      tags: ['jackit', 'never']
+    - role: proxy
+      tags: ['proxy']
+    - role: rfid
+      tags: ['rfid']
+    - role: standard
+      tags: ['standard']
     - role: web
       tags: ['web']
+    - role: wifi
+      tags: ['wifi']
