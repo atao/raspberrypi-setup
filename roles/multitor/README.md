@@ -1,3 +1,6 @@
+**Documentation**
+[Multitor wiki](https://github.com/trimstray/multitor/wiki/Manual)
+
 **Issues with multitor**
 
 See issues on project :
