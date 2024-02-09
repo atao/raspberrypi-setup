@@ -31,6 +31,13 @@
     regexp: '^#alias ll'
     line: alias ll='ls -l'
 
+- name: Add alias
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
+    regexp: '^Listen '
+    insertafter: '^#alias l='
+    line: alias fuck='sudo $(history -p \!\!)'
+
 - name: Print a debug message
   ansible.builtin.debug:
     msg: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
