@@ -16,7 +16,7 @@
     - role: rfid
       tags: ['rfid']
     - role: standard
-      tags: ['standard']
+      tags: ['standard', 'std']
     - role: web
       tags: ['web']
     - role: wifi
