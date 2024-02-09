@@ -1,5 +1,5 @@
 ---
-- name: Installation packages
+- name: Packages installation
   become: true
   become_user: root
   ansible.builtin.apt:

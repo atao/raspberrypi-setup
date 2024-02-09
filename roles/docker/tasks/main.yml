@@ -27,7 +27,7 @@
     mode: '0644'
   when: not docker_exist.stat.exists
 
-- name: Run install script
+- name: Run docker install script
   ansible.builtin.command:
     argv:
       - sh
@@ -42,7 +42,7 @@
   debug:
     var: docker_version.stdout_lines
 
-- name: Remove script
+- name: Remove docker install script
   file:
     path: "{{ ansible_facts['env']['HOME'] }}/get-docker.sh"
     state: absent
