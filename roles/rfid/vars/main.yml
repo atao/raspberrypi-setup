@@ -4,3 +4,4 @@ apt_packages:
   - libnfc-examples
   - mfoc
   - mfcuk
+  - xxd
