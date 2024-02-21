@@ -23,7 +23,7 @@ You can choose what you want to install with tags :
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
 
 Containers :
-- **jd2** docker container for JDownloader 2 [jlesage/jdownloader-2](https://github.com/jlesage/docker-jdownloader-2)
+- **jd2** docker container for JDownloader 2 [jlesage/jdownloader-2](https://github.com/jlesage/docker-jdownloader-2) -- See [Configuration tips'](https://github.com/atao/raspberrypi-setup/blob/main/roles/container/README.md)
 - **portainer** Portainer CE - a lightweight service delivery platform for containerized applications [portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce)
 
 ## Standalone
