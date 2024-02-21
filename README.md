@@ -14,16 +14,16 @@ You can choose what you want to install with tags :
 - **display** : configure my display with [LCD-show](https://github.com/goodtft/LCD-show)
 - **docker** : install Docker
 - **jackit** : install [jackit](https://github.com/insecurityofthings/jackit) for exploit code for Mousejack
-- ~~**multitor** : install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor)) -- [Known issues](https://github.com/atao/raspberrypi-setup/blob/main/roles/multitor/README.md)~~
+- ~~**multitor** : install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor)) &rarr; [Known issues](https://github.com/atao/raspberrypi-setup/blob/main/roles/multitor/README.md)~~
 - **proxy** : install Tor and proxy tools. [README](roles/proxy/README.md)
-- **rfid** : install RFID tools ([libnfc](https://github.com/nfc-tools/libnfc), [mfoc](https://github.com/nfc-tools/mfoc), [mfcuk](https://github.com/nfc-tools/mfcuk)) and keys from [MifareClassicTool](https://github.com/ikarus23/MifareClassicTool/tree/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files) -- See [Notes](roles/rfid/README.md)
+- **rfid** : install RFID tools ([libnfc](https://github.com/nfc-tools/libnfc), [mfoc](https://github.com/nfc-tools/mfoc), [mfcuk](https://github.com/nfc-tools/mfcuk)) and keys from [MifareClassicTool](https://github.com/ikarus23/MifareClassicTool/tree/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files) &rarr; See [Notes](roles/rfid/README.md)
 - **web** : install nginx and certbot
 - **wifi** : install Wifi and GPS tools for wardriving
 
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
 
 Containers :
-- **jd2** docker container for JDownloader 2 [jlesage/jdownloader-2](https://github.com/jlesage/docker-jdownloader-2) -- See [Configuration tips'](roles/container/README.md)
+- **jd2** docker container for JDownloader 2 [jlesage/jdownloader-2](https://github.com/jlesage/docker-jdownloader-2) &rarr; See [Configuration tips'](roles/container/README.md)
 - **portainer** Portainer CE - a lightweight service delivery platform for containerized applications [portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce)
 
 ## Standalone
