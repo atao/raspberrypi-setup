@@ -42,5 +42,5 @@
     - "{{ ansible_facts['env']['HOME'] }}/jdownloader:/config"
     - /mnt:/output
    env:
-    "JDOWNLOADER_HEADLESS": "1"
+    "JDOWNLOADER_HEADLESS": "0"
   tags: jd2
