@@ -10,6 +10,7 @@ apt_packages:
   - sqlmap
   - python3-lxml
   - python3-pip
+  - python3-venv
   - unattended-upgrades
   - iptraf
   - mc
