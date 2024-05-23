@@ -18,3 +18,4 @@ apt_packages:
   - dnsutils
   - traceroute
   - ansible-lint
+  - fail2ban
