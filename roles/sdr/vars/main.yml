@@ -1,0 +1,4 @@
+---
+apt_packages:
+  - rtl-sdr
+  - rtl-433
