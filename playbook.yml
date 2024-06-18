@@ -4,15 +4,15 @@
   become: true
   become_user: atao
   roles:
-    - role: container
+    - role: containers
     - role: display
       tags: ['display', 'never']
     - role: docker
       tags: ['docker']
     - role: jackit
       tags: ['jackit', 'never']
-    - role: proxy
-      tags: ['proxy']
+    - role: tor
+      tags: ['tor']
     - role: rfid
       tags: ['rfid']
     - role: sdr

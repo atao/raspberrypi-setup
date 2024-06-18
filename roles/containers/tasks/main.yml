@@ -44,3 +44,30 @@
    env:
     "JDOWNLOADER_HEADLESS": "0"
   tags: jd2
+
+- name: Run rotating Tor HTTP proxy container
+  become: true
+  become_user: root
+  docker_container:
+   name: rotating-tor-http-proxy
+   image: zhaowde/rotating-tor-http-proxy
+   ports:
+    - "3128:3128"
+    - "4444:4444"
+   env:
+    TOR_INSTANCES: "5"
+    TOR_REBUILD_INTERVAL: "3600"
+   restart_policy: always
+  tags: proxy
+
+- name: Get list of containers
+  become: true
+  become_user: root
+  command: docker ps -a
+  register: docker_containers
+  tags: always
+
+- name: Show state of Docker containers
+  debug:
+   var: docker_containers.stdout_lines
+  tags: always
