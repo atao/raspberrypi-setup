@@ -48,16 +48,19 @@
 - name: Run rotating Tor HTTP proxy container
   become: true
   become_user: root
-  docker_container:
+  community.docker.docker_container:
    name: rotating-tor-http-proxy
    image: zhaowde/rotating-tor-http-proxy
+   state: started
+   recreate: false
+   detach: true
+   restart_policy: "always"
    ports:
     - "3128:3128"
     - "4444:4444"
    env:
     TOR_INSTANCES: "5"
     TOR_REBUILD_INTERVAL: "3600"
-   restart_policy: always
   tags: proxy
 
 - name: Get list of containers
