@@ -3,7 +3,7 @@
 Once the JDownloader container has been graphically launched for the first time and you've logged in to your [My-JDownloader](https://my.jdownloader.org/login.html) account.
 
 Find informations
-```
+```bash
 sudo docker ps -a
 ```
 output :
@@ -13,7 +13,7 @@ CONTAINER ID   IMAGE                   COMMAND   CREATED         STATUS         
 ```
 
 Stop the container
-```
+```bash
 sudo docker stop <ID>
 ```
 
@@ -26,13 +26,13 @@ auto_remove: false
 
 Run the playbook again with the jd2 tag, to create the container once more.
 
-```
+```bash
 ansible-playbook playbook.yml -i hosts --tags jd2
 ```
 
 Now you can start and stop it, but your My-JDownloader account will always be present at each launch.
 
-```
+```bash
 sudo docker start <ID>
 sudo docker stop <ID>
 ```
