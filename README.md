@@ -73,9 +73,6 @@ If you test it in WSL run this command before :
 sudo rm /usr/lib/python3.11/EXTERNALLY-MANAGED
 sudo apt install curl
 ```
-
-## Star History
-[![Star History Chart](https://api.star-history.com/svg?repos=atao/raspberrypi-setup&Date&type=Date)](https://star-history.com/#atao/raspberrypi-setup&Date)
 --
 
 Inspired from [geerlingguy / mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook) and [nico2che / mac-setup](https://github.com/nico2che/mac-setup)
