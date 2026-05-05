@@ -2,9 +2,10 @@
   hosts: RaspberryPi
   gather_facts: true
   become: true
-  become_user: atao
+  become_user: "{{ lookup('env','USER') }}"
   roles:
     - role: containers
+      tags: ['containers']
     - role: display
       tags: ['display', 'never']
     - role: docker
