@@ -45,7 +45,7 @@
     "JDOWNLOADER_HEADLESS": "0"
   tags: jd2
 
-- name: Run rotating Tor HTTP proxy container
+- name: Create rotating Tor HTTP proxy container
   become: true
   become_user: root
   community.docker.docker_container:
