@@ -7,37 +7,29 @@
     update_cache: true
     autoremove: true
 
-- name: Check if .vimrc exists
-  ansible.builtin.stat:
-    path: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
-  register: vimrc
-
-- name: Configure .vimrc
-  ansible.builtin.lineinfile:
-    path: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
-    line: |
-      syntax enable
-      set mouse-=a
-      set paste
-    create: true
+- name: Deploy .vimrc from template
+  ansible.builtin.template:
+    src: vimrc.j2
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vimrc"
     owner: "{{ ansible_facts['env']['LOGNAME'] }}"
     group: "{{ ansible_facts['env']['LOGNAME'] }}"
     mode: '0644'
-  when: not vimrc.stat.exists
 
-- name: Enable ll alias in .bashrc
+- name: Add managed aliases block to .bashrc
+  ansible.builtin.blockinfile:
+    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
+    block: |
+      {% for alias in bashrc_aliases %}
+      {{ alias }}
+      {% endfor %}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - aliases"
+    insertafter: EOF
+    create: yes
+
+- name: Ensure other custom lines exist in .bashrc
   ansible.builtin.lineinfile:
     path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
-    regexp: '^#alias ll'
-    line: alias ll='ls -l'
-
-- name: Add alias
-  ansible.builtin.lineinfile:
-    path: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
-    regexp: '^Listen '
-    insertafter: '^#alias l='
-    line: alias fuck='sudo $(history -p \!\!)'
-
-- name: Print a debug message
-  ansible.builtin.debug:
-    msg: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
+    regexp: '^# Custom Ansible config'
+    line: "# Custom Ansible config"
+    insertafter: EOF
+    state: present
