@@ -19,3 +19,9 @@ apt_packages:
   - traceroute
   - ansible-lint
   - fail2ban
+
+bashrc_aliases:
+  - "alias ll='ls -l'"
+  - "alias la='ls -la'"
+  - "alias lla='ls -lah'"
+  - "alias fuck='sudo $(history -p !!)'"
