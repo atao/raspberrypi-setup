@@ -14,7 +14,6 @@ apt_packages:
   - unattended-upgrades
   - iptraf
   - mc
-  - youtube-dl
   - dnsutils
   - traceroute
   - ansible-lint
