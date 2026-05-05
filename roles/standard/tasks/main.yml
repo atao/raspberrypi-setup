@@ -17,7 +17,7 @@
 
 - name: Download Solarized colorscheme
   ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/ericbn/vim-solarized/master/colors/solarized.vim
+    url: "{{ colorscheme_solarized_url }}"
     dest: "{{ ansible_facts['env']['HOME'] }}/.vim/colors/solarized.vim"
     owner: "{{ ansible_facts['env']['LOGNAME'] }}"
     group: "{{ ansible_facts['env']['LOGNAME'] }}"
