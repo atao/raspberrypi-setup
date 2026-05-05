@@ -68,9 +68,7 @@
   become_user: root
   command: docker ps -a
   register: docker_containers
-  tags: always
 
 - name: Show state of Docker containers
   debug:
    var: docker_containers.stdout_lines
-  tags: always
