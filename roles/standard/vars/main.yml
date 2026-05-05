@@ -14,7 +14,6 @@ apt_packages:
   - mc
   - dnsutils
   - traceroute
-  - ansible-lint
   - fail2ban
 
 bashrc_aliases:
