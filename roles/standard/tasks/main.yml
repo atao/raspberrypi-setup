@@ -40,7 +40,7 @@
       {% endfor %}
     marker: "# {mark} ANSIBLE MANAGED BLOCK - aliases"
     insertafter: EOF
-    create: yes
+    create: true
 
 - name: Ensure other custom lines exist in .bashrc
   ansible.builtin.lineinfile:

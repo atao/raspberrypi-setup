@@ -1,3 +1,4 @@
+---
 - name: RaspberryPi-Setup
   hosts: RaspberryPi
   gather_facts: true
