@@ -7,6 +7,22 @@
     update_cache: true
     autoremove: true
 
+- name: Ensure ~/.vim/colors directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts['env']['HOME'] }}/.vim/colors"
+    state: directory
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
+    mode: '0755'
+
+- name: Download Solarized colorscheme
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ericbn/vim-solarized/master/colors/solarized.vim
+    dest: "{{ ansible_facts['env']['HOME'] }}/.vim/colors/solarized.vim"
+    owner: "{{ ansible_facts['env']['LOGNAME'] }}"
+    group: "{{ ansible_facts['env']['LOGNAME'] }}"
+    mode: '0644'
+
 - name: Deploy .vimrc from template
   ansible.builtin.template:
     src: vimrc.j2
