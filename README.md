@@ -29,7 +29,7 @@ Containers :
 - **proxy** [Rotating Tor HTTP proxy container](https://github.com/zhaow-de/rotating-tor-http-proxy)
 
 List of all tasks :
-```bash
+```
 containers : Create volume portainer_data TAGS: [containers, portainer]
 containers : Create container portainer-ce        TAGS: [containers, portainer]
 containers : Container jlesage/jdownloader-2      TAGS: [containers, jd2]
