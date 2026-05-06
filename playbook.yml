@@ -1,27 +1,40 @@
 ---
-- name: RaspberryPi-Setup
-  hosts: RaspberryPi
+- name: "RaspberryPi-Setup"
+  hosts: "RaspberryPi"
   gather_facts: true
   become: true
-  become_user: "{{ lookup('env','USER') }}"
+  become_user: "{{ lookup('env', 'USER') }}"
   roles:
-    - role: containers
-      tags: ['containers']
-    - role: display
-      tags: ['display', 'never']
-    - role: docker
-      tags: ['docker']
-    - role: jackit
-      tags: ['jackit', 'never']
-    - role: tor
-      tags: ['tor']
-    - role: rfid
-      tags: ['rfid']
-    - role: sdr
-      tags: ['sdr']
-    - role: standard
-      tags: ['standard', 'std']
-    - role: web
-      tags: ['web']
-    - role: wifi
-      tags: ['wifi']
+    - role: "containers"
+      tags:
+        - containers
+    - role: "display"
+      tags:
+        - display
+        - never
+    - role: "docker"
+      tags:
+        - docker
+    - role: "jackit"
+      tags:
+        - jackit
+        - never
+    - role: "tor"
+      tags:
+        - tor
+    - role: "rfid"
+      tags:
+        - rfid
+    - role: "sdr"
+      tags:
+        - sdr
+    - role: "standard"
+      tags:
+        - standard
+        - std
+    - role: "web"
+      tags:
+        - web
+    - role: "wifi"
+      tags:
+        - wifi
