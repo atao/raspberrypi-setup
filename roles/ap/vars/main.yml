@@ -1,0 +1,5 @@
+---
+ap_conn_name: "RaspberryAP"   # NM connection name
+ap_ssid: "raspberry"          # SSID
+ap_psk: "raspberry"           # WPA2 passphrase
+ap_wireless_band: "bg"        # bg for 2.4GHz

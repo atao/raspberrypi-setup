@@ -1,0 +1,116 @@
+---
+- name: install AP
+  block:
+    - name: Install NetworkManager (Debian family)
+      apt:
+        name: network-manager
+        state: present
+        update_cache: true
+      become: true
+      when: ansible_os_family == "Debian"
+
+    - name: Fail if nmcli not available
+      command: nmcli --version
+      register: nmcli_check
+      failed_when: nmcli_check.rc != 0
+      changed_when: false
+      become: true
+
+    - name: Copy templated CheckAP.sh to /usr/local/bin
+      template:
+        src: CheckAP.sh.j2
+        dest: /usr/local/bin/CheckAP.sh
+        owner: root
+        group: root
+        mode: '0755'
+      become: true
+
+    - name: Find managed Wi‑Fi interface
+      command: nmcli -t -f DEVICE,TYPE,STATE device status
+      register: nmcli_devices
+      changed_when: false
+      failed_when: false
+      become: true
+
+    - name: Set wifi_iface fact from nmcli output
+      set_fact:
+        wifi_iface: >
+            {{ (nmcli_devices.stdout_lines
+            | select('match', '^[^:]+:wifi:') | list)[0].split(':')[0] }}
+        when: >
+         {{ nmcli_devices.stdout_lines
+         | select('match', '^[^:]+:wifi:') | list | length > 0 }}
+
+    - name: Fail if no managed Wi‑Fi interface found
+      fail:
+        msg: "No managed Wi‑Fi interface found; cannot create AP."
+      when: wifi_iface is not defined
+
+    - name: Delete existing NM connection with same name (ignore failure)
+      command: nmcli connection delete "{{ ap_conn_name }}"
+      register: del_conn
+      failed_when: false
+      changed_when: del_conn.rc == 0
+      become: true
+
+    - name: Create NM Wi‑Fi connection
+      command: >
+        nmcli connection add type wifi ifname
+        {{ wifi_iface }} con-name {{ ap_conn_name }}
+        autoconnect no ssid {{ ap_ssid }}
+      register: add_conn
+      failed_when: add_conn.rc != 0
+      become: true
+
+    - name: Configure AP mode, band and IPv4 method
+      command: >
+        nmcli connection modify {{ ap_conn_name }}
+        802-11-wireless.mode ap 802-11-wireless.band
+        {{ ap_wireless_band }} ipv4.method shared
+      become: true
+
+    - name: Configure WPA2-PSK key management
+      command: >
+       nmcli connection modify {{ ap_conn_name }}
+       802-11-wireless-security.key-mgmt wpa-psk
+      become: true
+
+    - name: Set AP passphrase
+      command: >
+        nmcli connection modify {{ ap_conn_name }}
+        802-11-wireless-security.psk "{{ ap_psk }}"
+      become: true
+
+    - name: Create systemd service to run CheckAP.sh at boot
+      copy:
+        dest: /etc/systemd/system/checkap.service
+        owner: root
+        group: root
+        mode: '0644'
+        content: |
+         [Unit]
+         Description=Run CheckAP to enable AP when Ethernet is down
+         After=network.target NetworkManager.service
+         Wants=NetworkManager.service
+
+         [Service]
+         Type=oneshot
+         ExecStart=/usr/local/bin/CheckAP.sh
+         RemainAfterExit=true
+
+         [Install]
+         WantedBy=multi-user.target
+      become: true
+
+    - name: Reload systemd daemon
+      systemd:
+        daemon_reload: true
+      become: true
+
+    - name: Enable and start checkap.service
+      systemd:
+        name: checkap.service
+        enabled: true
+        state: started
+      become: true
+  tags: ap

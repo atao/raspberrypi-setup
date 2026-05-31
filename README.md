@@ -20,6 +20,7 @@ You can choose what you want to install with tags :
 - **sdr** : install SDR tools ([rtl_433](https://github.com/merbanan/rtl_433))
 - **web** : install nginx and certbot
 - **wifi** : install Wifi and GPS tools for wardriving
+- **ap** : start a hotspot when no Ethernet cable is plugged in — useful for mobile use to access tools. &rarr; [AP config file](roles/ap/vars/main.yml)
 
 _You will need to modify [this file](roles/display/tasks/main.yml) to configure the correct display._
 
@@ -28,44 +29,6 @@ Containers :
 - **portainer** Portainer CE - a lightweight service delivery platform for containerized applications [portainer/portainer-ce](https://hub.docker.com/r/portainer/portainer-ce)
 - **proxy** [Rotating Tor HTTP proxy container](https://github.com/zhaow-de/rotating-tor-http-proxy)
 
-List of all tasks :
-```
-containers : Create volume portainer_data TAGS: [containers, portainer]
-containers : Create container portainer-ce        TAGS: [containers, portainer]
-containers : Container jlesage/jdownloader-2      TAGS: [containers, jd2]
-containers : Create rotating Tor HTTP proxy container     TAGS: [containers, proxy]
-containers : Get list of containers       TAGS: [containers]
-containers : Show state of Docker containers      TAGS: [containers]
-docker : Verify if docker is installed    TAGS: [docker]
-docker : Uninstall all conflicting packages with Docker   TAGS: [docker]
-docker : Install Docker packages  TAGS: [docker]
-docker : Download docker install script   TAGS: [docker]
-docker : Run docker install script        TAGS: [docker]
-docker : Verify docker installation       TAGS: [docker]
-docker : Docker version   TAGS: [docker]
-docker : Remove docker install script     TAGS: [docker]
-tor : Packages installation       TAGS: [tor]
-tor : Download script check_tor.py        TAGS: [tor]
-rfid : Packages installation      TAGS: [rfid]
-rfid : Download std.keys from MifareClassicTool   TAGS: [rfid]
-rfid : Download extended-std.keys from MifareClassicTool  TAGS: [rfid]
-rfid : Download mct2dmp from bm-mifare-classic    TAGS: [rfid]
-rfid : Download 4B_Converter from ClassicConverter        TAGS: [rfid]
-rfid : Download 7B_Converter from ClassicConverter        TAGS: [rfid]
-sdr : Packages installation       TAGS: [sdr]
-standard : System update/upgrade  TAGS: [standard, std]
-standard : Packages installation  TAGS: [standard, std]
-standard : Ensure ~/.vim/colors directory exists  TAGS: [standard, std]
-standard : Download Solarized colorscheme TAGS: [standard, std]
-standard : Deploy .vimrc from template    TAGS: [standard, std]
-standard : Add managed aliases block to .bashrc   TAGS: [standard, std]
-standard : Ensure other custom lines exist in .bashrc     TAGS: [standard, std]
-web : Packages installation       TAGS: [web]
-web : Check if certbot already installed  TAGS: [web]
-web : Install certbot     TAGS: [web]
-web : Link certbot        TAGS: [web]
-wifi : Packages installation      TAGS: [wifi]
-```
 
 ## Standalone
 
@@ -85,12 +48,12 @@ To setup run the following command :
 ```
 git clone https://github.com/atao/raspberrypi-setup.git
 cd raspberrypi-setup
-ansible-playbook playbook.yml -i hosts --tags all -K
+sudo ansible-playbook playbook.yml -i hosts --tags all -K
 ```
 
 List playbook tasks :
 ```
-ansible-playbook playbook.yml -i hosts --list-tasks
+sudo ansible-playbook playbook.yml -i hosts --list-tasks
 ```
 
 ## Examples

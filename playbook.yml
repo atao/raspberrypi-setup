@@ -5,6 +5,9 @@
   become: true
   become_user: "{{ lookup('env', 'USER') }}"
   roles:
+    - role: "ap"
+      tags:
+        - ap 
     - role: "containers"
       tags:
         - containers

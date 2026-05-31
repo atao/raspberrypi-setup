@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+AP_CONN="{{ ap_conn_name }}"
+ETH_IFACE=""
+
+command -v nmcli >/dev/null 2>&1 || { echo "nmcli not found." >&2; exit 2; }
+
+if [ -z "$ETH_IFACE" ]; then
+  ETH_IFACE=$(nmcli -t -f DEVICE,TYPE,STATE device status | awk -F: '$2=="ethernet" && $3!="unavailable"{print $1; exit}')
+fi
+
+if [ -z "$ETH_IFACE" ]; then
+  echo "No managed Ethernet interface found." >&2
+  exit 3
+fi
+
+eth_connected() {
+  nmcli -t -f DEVICE,STATE device status | awk -F: -v d="$ETH_IFACE" '$1==d{print $2}' | grep -Eiq 'connected|activated'
+}
+
+ap_active() {
+  nmcli -t -f NAME connection show --active | grep -Fxq "$AP_CONN"
+}
+
+if eth_connected; then
+  if ap_active; then
+    nmcli connection down "$AP_CONN" >/dev/null 2>&1 || true
+    echo "AP $AP_CONN brought down (Ethernet connected)."
+  else
+    echo "Ethernet connected — AP $AP_CONN already inactive."
+  fi
+else
+  if ap_active; then
+    echo "Ethernet disconnected — AP $AP_CONN already active."
+  else
+    nmcli connection up "$AP_CONN"
+    echo "AP $AP_CONN brought up (Ethernet disconnected)."
+  fi
+fi
+
