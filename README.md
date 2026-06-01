@@ -15,7 +15,7 @@ Choose which components to install by using tags. Each tag installs specific pac
 |Tag|Description|Notes|
 | ------------- | ------------- | ------------- |
 |**standard**, **std**|Core installation and configuration| [standard packages](roles/standard/vars/main.yml), [bashrc](roles/standard/tasks/main.yml), [vimrc](roles/standard/templates/vimrc.j2)|
-|**ap**|start a hotspot when no Ethernet cable is plugged in|Useful for mobile use to access tools. &rarr; _[AP config file](roles/ap/vars/main.yml)_|
+|**ap**|start a hotspot when no Ethernet cable is plugged in|Useful for mobile use to access tools. &rarr; _[AP config file](roles/ap/vars/main.yml)_ (Access with ssh \$USER@10.0.0.1)|
 |**display**|Configure display with [LCD-show](https://github.com/goodtft/LCD-show)|Need to modify [this file](roles/display/tasks/main.yml) to configure the correct display.|
 |**docker**|Docker installation|Container runtime environment|
 |**jackit**|[jackit](https://github.com/insecurityofthings/jackit) installation|Exploit Code for [Mousejack](https://bastille.net/research/vulnerabilities-mousejack/)
