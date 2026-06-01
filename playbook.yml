@@ -7,7 +7,7 @@
   roles:
     - role: "ap"
       tags:
-        - ap 
+        - ap
     - role: "containers"
       tags:
         - containers
