@@ -2,62 +2,61 @@
 set -euo pipefail
 
 AP_CONN="{{ ap_conn_name }}"
-ETH_IFACE=""
 DEBUG="${1:-}"
 
-# nmcli is required
+# Ensure nmcli is available
 if ! command -v nmcli >/dev/null 2>&1; then
-  echo "CheckAP: nmcli not found." >&2
-  exit 2
+    echo "CheckAP: nmcli not found." >&2
+    exit 2
 fi
 
-# Detect managed Ethernet interface
-ETH_IFACE=$(nmcli -t -f DEVICE,TYPE,STATE device status \
-  | awk -F: '$2=="ethernet" && $3!="unavailable" {print $1; exit}')
-
-if [ -z "$ETH_IFACE" ]; then
-  # Do not consider as fatal error: log and exit with 0
-  echo "CheckAP: No managed Ethernet interface found; nothing to do." >&2
-  exit 0
-fi
+# Detect the first Ethernet interface managed by NetworkManager
+ETH_IFACE=$(
+    nmcli -t -f DEVICE,TYPE device status \
+    | awk -F: '$2=="ethernet" {print $1; exit}'
+)
 
 if [ "$DEBUG" = "debug" ]; then
-  echo "DEBUG: ETH_IFACE detected as '$ETH_IFACE'" >&2
+    echo "DEBUG: Ethernet interface detected: '${ETH_IFACE:-none}'"
+    nmcli -t -f DEVICE,TYPE,STATE device status
 fi
 
-# Returns true if Ethernet is connected/activated
+# Check whether Ethernet is connected
 eth_connected() {
-  nmcli -t -f DEVICE,STATE device status | grep "^${ETH_IFACE}:connected" >/dev/null 2>&1
+    [ -n "${ETH_IFACE:-}" ] || return 1
+
+    nmcli -t -f DEVICE,STATE device status \
+        | grep -q "^${ETH_IFACE}:connected"
 }
 
-# Returns true if AP connection is active
+# Check whether the AP connection is active
 ap_active() {
-  nmcli -t -f NAME connection show --active | grep -Fxq "$AP_CONN"
+    nmcli -t -f NAME connection show --active | grep -Fxq "$AP_CONN"
 }
 
-# Main action
+# Main logic
 if eth_connected; then
-  if ap_active; then
-    # Bring down AP if Ethernet is connected and AP is active
-    nmcli connection down "$AP_CONN" >/dev/null 2>&1 || true
-    echo "CheckAP: AP '$AP_CONN' brought down (Ethernet connected)."
-  else
-    # Ethernet is connected but AP is already inactive
-    echo "CheckAP: Ethernet connected — AP '$AP_CONN' already inactive."
-  fi
-else
-  if ap_active; then
-    # Ethernet is disconnected but AP is already active
-    echo "CheckAP: Ethernet disconnected — AP '$AP_CONN' already active."
-  else
-    # Bring up AP if Ethernet is disconnected and AP is inactive
-    if nmcli connection up "$AP_CONN" >/dev/null 2>&1; then
-      echo "CheckAP: AP '$AP_CONN' brought up (Ethernet disconnected)."
+
+    if ap_active; then
+        nmcli connection down "$AP_CONN" >/dev/null 2>&1 || true
+        echo "CheckAP: AP '$AP_CONN' disabled (Ethernet connected)."
     else
-      echo "CheckAP: Failed to bring up AP '$AP_CONN'." >&2
-      exit 1
+        echo "CheckAP: Ethernet connected; AP '$AP_CONN' already disabled."
     fi
-  fi
+
+else
+
+    if ap_active; then
+        echo "CheckAP: Ethernet unavailable; AP '$AP_CONN' already enabled."
+    else
+        if nmcli connection up "$AP_CONN" >/dev/null 2>&1; then
+            echo "CheckAP: AP '$AP_CONN' enabled (Ethernet unavailable)."
+        else
+            echo "CheckAP: Failed to enable AP '$AP_CONN'." >&2
+            exit 1
+        fi
+    fi
+
 fi
 
 exit 0
