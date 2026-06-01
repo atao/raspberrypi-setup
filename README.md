@@ -8,9 +8,9 @@ It's compatible with all models. It has been successfully tested on multiple mod
 
 ## Roles
 
-Choose which components to install by using tags. Each tag installs specific packages and configurations:
+Choose which components to install by using tags. Each tag installs specific packages and configurations :
 
-#### Rôles installation :
+#### Roles installation :
 
 |Tag|Description|Notes|
 | ------------- | ------------- | ------------- |
