@@ -97,18 +97,32 @@
         group: root
         mode: '0644'
         content: |
-         [Unit]
-         Description=Run CheckAP to enable AP when Ethernet is down
-         After=network.target NetworkManager.service
-         Wants=NetworkManager.service
+          [Unit]
+          Description=Enable or disable RaspberryAP based on Ethernet status
+          After=NetworkManager.service network-online.target
+          Wants=NetworkManager.service network-online.target
 
-         [Service]
-         Type=oneshot
-         ExecStart=/usr/local/bin/CheckAP.sh
-         RemainAfterExit=true
+          [Service]
+          Type=oneshot
 
-         [Install]
-         WantedBy=multi-user.target
+          # Wait until NetworkManager has completed initialization
+          ExecStartPre=/usr/bin/nm-online -q --timeout=60
+
+          # Run the script in debug mode
+          ExecStart=/usr/local/bin/CheckAP.sh debug
+
+          User=root
+          Group=root
+
+          # Send output to the systemd journal
+          StandardOutput=journal
+          StandardError=journal
+
+          # Keep the service in the active state after execution
+          RemainAfterExit=yes
+
+          [Install]
+          WantedBy=multi-user.target
       become: true
 
     - name: Reload systemd daemon
