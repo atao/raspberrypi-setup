@@ -32,14 +32,16 @@
       failed_when: false
       become: true
 
-    - name: Set wifi_iface fact from nmcli output
+    - name: Set wifi_iface fact from nmcli output (if any)
       set_fact:
         wifi_iface: >
-            {{ (nmcli_devices.stdout_lines
-            | select('match', '^[^:]+:wifi:') | list)[0].split(':')[0] }}
-        when: >
-         {{ nmcli_devices.stdout_lines
-         | select('match', '^[^:]+:wifi:') | list | length > 0 }}
+         "{{ (nmcli_devices.stdout_lines
+         | select('match', '^[^:]+:wifi:')
+         | list)[0].split(':')[0] }}"
+      when: >
+          nmcli_devices.stdout_lines is defined and
+          (nmcli_devices.stdout_lines | select('match',
+          '^[^:]+:wifi:') | list | length) > 0
 
     - name: Fail if no managed Wi‑Fi interface found
       fail:
