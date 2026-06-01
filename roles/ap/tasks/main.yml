@@ -83,6 +83,13 @@
         802-11-wireless-security.psk "{{ ap_psk }}"
       become: true
 
+    - name: Network addressing for AP connection
+      command: >
+        sudo nmcli connection modify {{ ap_conn_name }}
+        ipv4.addresses 10.0.0.1/24 ipv4.method shared \
+        ipv6.method ignore
+      become: true
+
     - name: Create systemd service to run CheckAP.sh at boot
       copy:
         dest: /etc/systemd/system/checkap.service
