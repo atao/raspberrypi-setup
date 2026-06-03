@@ -15,6 +15,7 @@ apt_packages:
   - dnsutils
   - traceroute
   - fail2ban
+  - bash-completion
 
 bashrc_aliases:
   - "alias ll='ls -l'"
