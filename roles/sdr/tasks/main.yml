@@ -2,6 +2,102 @@
 - name: Packages installation
   become: true
   become_user: root
-  ansible.builtin.apt:
-    name: "{{ apt_packages }}"
-    update_cache: true
+  block:
+    - name: Remove legacy and conflicting APT packages
+      ansible.builtin.apt:
+        name:
+          - rtl-sdr
+          - librtlsdr-dev
+          - rtl-433
+        state: absent
+        purge: true
+
+    - name: Install required build dependencies
+      ansible.builtin.apt:
+        name:
+          - git
+          - cmake
+          - build-essential
+          - libusb-1.0-0-dev
+          - pkg-config
+          - libtool
+          - doxygen
+        update_cache: true
+        state: present
+
+    - name: Blacklist the native Linux DVB TV driver
+      ansible.builtin.kernel_blacklist:
+        name: dvb_usb_rtl28xxu
+        state: present
+
+    - name: Check if RTL-SDR drivers are already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/rtl_test
+      register: rtl_test_bin
+
+    - name: Download and compile official RTL-SDR Blog V4 drivers
+      block:
+        - name: Clone RTL-SDR Blog repository
+          ansible.builtin.git:
+            repo: https://github.com/merbanan/rtl_sdr
+            dest: /tmp/rtl-sdr-blog
+            version: master
+            force: true
+
+        - name: Create RTL-SDR build directory
+          ansible.builtin.file:
+            path: /tmp/rtl-sdr-blog/build
+            state: directory
+
+        - name: Configure, build and install RTL-SDR drivers
+          ansible.builtin.command:
+            cmd: "{{ item }}"
+            chdir: /tmp/rtl-sdr-blog/build
+          loop:
+            - cmake ../ -DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON
+            - make
+            - make install
+
+        - name: Reload dynamic linker run-time bindings
+          ansible.builtin.command:
+            cmd: ldconfig
+          changed_when: false
+      when: not rtl_test_bin.stat.exists
+
+    - name: Check if rtl_433 is already installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/rtl_433
+      register: rtl_433_bin
+
+    - name: Download and compile rtl_433 linked to the V4 library
+      block:
+        - name: Clone rtl_433 repository
+          ansible.builtin.git:
+            repo: https://github.com/merbanan/rtl_433
+            dest: /tmp/rtl_433
+            version: master
+            force: true
+
+        - name: Create rtl_433 build directory
+          ansible.builtin.file:
+            path: /tmp/rtl_433/build
+            state: directory
+
+        - name: Configure, build and install rtl_433
+          ansible.builtin.command:
+            cmd: "{{ item }}"
+            chdir: /tmp/rtl_433/build
+          loop:
+            - cmake ../
+            - make
+            - make install
+      when: not rtl_433_bin.stat.exists
+
+    - name: Clean up temporary build source files
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /tmp/rtl-sdr-blog
+        - /tmp/rtl_433
+
