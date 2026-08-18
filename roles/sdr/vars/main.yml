@@ -19,7 +19,7 @@ sdr_packages_to_install:
 
 sdr_compilations:
   - name: "RTL-SDR Blog V4 drivers"
-    repo: "https://github.com/osmocom/rtl-sdr"
+    repo: "https://github.com/rtlsdrblog/rtl-sdr-blog"
     version: "master"
     dest: "/tmp/rtl-sdr-blog"
     binary: "/usr/local/bin/rtl_test"
