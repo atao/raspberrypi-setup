@@ -1,7 +1,5 @@
 # Raspberry Pi Setup
 
-[![YAML Lint](https://github.com/atao/raspberrypi-setup/actions/workflows/main.yml/badge.svg)](https://github.com/atao/raspberrypi-setup/actions/workflows/main.yml)
-
 This [Ansible](https://www.ansible.com/) playbook is designed to rapidly set up your Raspberry Pi.
 
 It's compatible with all models. It has been successfully tested on multiple models, including the Pi Zero W, Pi Zero 2W, and Pi 4B, among others. The playbook should work well on both Debian and Debian-based distributions.
@@ -22,7 +20,7 @@ Choose which components to install by using tags. Each tag installs specific pac
 |~~**multitor**~~|~~install a proxy with multiple TOR instances with load-balancing ([trimstray/multitor](https://github.com/trimstray/multitor))~~|~~[Known issues](https://github.com/atao/raspberrypi-setup/blob/main/roles/multitor/README.md)~~|
 |**tor**|Tor installation|See [README](roles/tor/README.md)|
 |**rfid**|RFID tools installation|Tools ([libnfc](https://github.com/nfc-tools/libnfc), [mfoc](https://github.com/nfc-tools/mfoc), [mfcuk](https://github.com/nfc-tools/mfcuk)) and keys from [MifareClassicTool](https://github.com/ikarus23/MifareClassicTool/tree/master/Mifare%20Classic%20Tool/app/src/main/assets/key-files) &rarr; _See [Notes](roles/rfid/README.md)_|
-|**sdr**|SDR tools installation|[rtl_433](https://github.com/merbanan/rtl_433), [rtl_sdr](https://github.com/merbanan/rtl_sdr)|
+|**sdr**|SDR tools installation|[rtl_433](https://github.com/merbanan/rtl_433), [rtl_sdr](https://github.com/merbanan/rtl_sdr), [multimon-ng](https://github.com/EliasOenal/multimon-ng) and SoX|
 |**web**|Nginx and Certbot installation||
 |**wifi**|Wifi and GPS tools installation|Wireless security testing and wardriving|
 
