@@ -1,0 +1,40 @@
+---
+sdr_packages_to_remove:
+  - rtl-sdr
+  - librtlsdr-dev
+  - rtl-433
+
+sdr_packages_to_install:
+  - git
+  - cmake
+  - build-essential
+  - libusb-1.0-0-dev
+  - pkg-config
+  - libtool
+  - doxygen
+  - sox
+  - libsox-fmt-all
+  - libpulse-dev
+  - libx11-dev
+
+sdr_compilations:
+  - name: "RTL-SDR Blog V4 drivers"
+    repo: "https://github.com/merbanan/rtl_sdr"
+    version: "master"
+    dest: "/tmp/rtl-sdr-blog"
+    binary: "/usr/local/bin/rtl_test"
+    cmake_opts: "-DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON"
+
+  - name: "rtl_433"
+    repo: "https://github.com/merbanan/rtl_433"
+    version: "master"
+    dest: "/tmp/rtl_433"
+    binary: "/usr/local/bin/rtl_433"
+    cmake_opts: ""
+
+  - name: "multimon-ng"
+    repo: "https://github.com/EliasOenal/multimon-ng"
+    version: "master"
+    dest: "/tmp/multimon-ng"
+    binary: "/usr/local/bin/multimon-ng"
+    cmake_opts: ""

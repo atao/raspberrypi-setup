@@ -1,27 +1,17 @@
 ---
-- name: Packages installation
+- name: Installation et configuration de la suite SDR
   become: true
   become_user: root
   block:
     - name: Remove legacy and conflicting APT packages
       ansible.builtin.apt:
-        name:
-          - rtl-sdr
-          - librtlsdr-dev
-          - rtl-433
+        name: "{{ sdr_packages_to_remove }}"
         state: absent
         purge: true
 
-    - name: Install required build dependencies
+    - name: Install required build dependencies and SoX
       ansible.builtin.apt:
-        name:
-          - git
-          - cmake
-          - build-essential
-          - libusb-1.0-0-dev
-          - pkg-config
-          - libtool
-          - doxygen
+        name: "{{ sdr_packages_to_install }}"
         update_cache: true
         state: present
 
@@ -30,73 +20,24 @@
         name: dvb_usb_rtl28xxu
         state: present
 
-    - name: Check if RTL-SDR drivers are already installed
+    - name: Check which SDR binaries are already installed
       ansible.builtin.stat:
-        path: /usr/local/bin/rtl_test
-      register: rtl_test_bin
+        path: "{{ item.binary }}"
+      loop: "{{ sdr_compilations }}"
+      register: sdr_binaries_stat
 
-    - name: Download and compile official RTL-SDR Blog V4 drivers
-      block:
-        - name: Clone RTL-SDR Blog repository
-          ansible.builtin.git:
-            repo: https://github.com/merbanan/rtl_sdr
-            dest: /tmp/rtl-sdr-blog
-            version: master
-            force: true
-
-        - name: Create RTL-SDR build directory
-          ansible.builtin.file:
-            path: /tmp/rtl-sdr-blog/build
-            state: directory
-
-        - name: Configure, build and install RTL-SDR drivers
-          ansible.builtin.command:
-            cmd: "{{ item }}"
-            chdir: /tmp/rtl-sdr-blog/build
-          loop:
-            - cmake ../ -DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON
-            - make
-            - make install
-
-        - name: Reload dynamic linker run-time bindings
-          ansible.builtin.command:
-            cmd: ldconfig
-          changed_when: false
-      when: not rtl_test_bin.stat.exists
-
-    - name: Check if rtl_433 is already installed
-      ansible.builtin.stat:
-        path: /usr/local/bin/rtl_433
-      register: rtl_433_bin
-
-    - name: Download and compile rtl_433 linked to the V4 library
-      block:
-        - name: Clone rtl_433 repository
-          ansible.builtin.git:
-            repo: https://github.com/merbanan/rtl_433
-            dest: /tmp/rtl_433
-            version: master
-            force: true
-
-        - name: Create rtl_433 build directory
-          ansible.builtin.file:
-            path: /tmp/rtl_433/build
-            state: directory
-
-        - name: Configure, build and install rtl_433
-          ansible.builtin.command:
-            cmd: "{{ item }}"
-            chdir: /tmp/rtl_433/build
-          loop:
-            - cmake ../
-            - make
-            - make install
-      when: not rtl_433_bin.stat.exists
+    - name: Download, compile and install SDR tools from source
+      ansible.builtin.include_tasks: compile.yml
+      loop: "{{ sdr_binaries_stat.results }}"
+      when: not compilation_item.stat.exists
+      loop_control:
+        loop_var: compilation_item
+        label: "{{ compilation_item.item.name }}"
 
     - name: Clean up temporary build source files
       ansible.builtin.file:
-        path: "{{ item }}"
+        path: "{{ item.dest }}"
         state: absent
-      loop:
-        - /tmp/rtl-sdr-blog
-        - /tmp/rtl_433
+      loop: "{{ sdr_compilations }}"
+      loop_control:
+        label: "{{ item.dest }}"

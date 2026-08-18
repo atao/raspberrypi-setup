@@ -1,0 +1,32 @@
+---
+- name: "Clone {{ compilation_item.item.name }} repository"
+  ansible.builtin.git:
+    repo: "{{ compilation_item.item.repo }}"
+    dest: "{{ compilation_item.item.dest }}"
+    version: "{{ compilation_item.item.version }}"
+    force: true
+
+- name: "Create build directory for {{ compilation_item.item.name }}"
+  ansible.builtin.file:
+    path: "{{ compilation_item.item.dest }}/build"
+    state: directory
+
+- name: "Configure {{ compilation_item.item.name }} with CMake"
+  ansible.builtin.command:
+    cmd: "cmake ../ {{ compilation_item.item.cmake_opts }}"
+    chdir: "{{ compilation_item.item.dest }}/build"
+
+- name: "Compile and install {{ compilation_item.item.name }}"
+  ansible.builtin.command:
+    cmd: "{{ compilation_cmd }}"
+    chdir: "{{ compilation_item.item.dest }}/build"
+  loop:
+    - make
+    - make install
+  loop_control:
+    loop_var: compilation_cmd
+
+- name: Reload dynamic linker run-time bindings
+  ansible.builtin.command:
+    cmd: ldconfig
+  changed_when: false
