@@ -34,6 +34,22 @@
         loop_var: compilation_item
         label: "{{ compilation_item.item.name }}"
 
+    - name: Copy Osmocom udev rules to system directory
+      ansible.builtin.copy:
+        src: "/tmp/rtl-sdr-blog/rtl-sdr.rules"
+        dest: "/etc/udev/rules.d/rtl-sdr.rules"
+        remote_src: true
+        mode: '0644'
+      failed_when: false
+
+    - name: Force udev daemon to reload rules
+      ansible.builtin.command: udevadm control --reload-rules
+      changed_when: false
+
+    - name: Trigger udev modifications for connected devices
+      ansible.builtin.command: udevadm trigger
+      changed_when: false
+
     - name: Clean up temporary build source files
       ansible.builtin.file:
         path: "{{ item.dest }}"
