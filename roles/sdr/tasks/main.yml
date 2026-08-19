@@ -9,7 +9,7 @@
         state: absent
         purge: true
 
-    - name: Install required build dependencies and SoX
+    - name: Install required build dependencies and packages
       ansible.builtin.apt:
         name: "{{ sdr_packages_to_install }}"
         update_cache: true
@@ -34,26 +34,34 @@
         loop_var: compilation_item
         label: "{{ compilation_item.item.name }}"
 
+    - name: Check if udev rules source exists before copying
+      ansible.builtin.stat:
+        path: "/tmp/rtl-sdr-blog/rtl-sdr.rules"
+      register: udev_source_stat
+
     - name: Copy Osmocom udev rules to system directory
       ansible.builtin.copy:
         src: "/tmp/rtl-sdr-blog/rtl-sdr.rules"
         dest: "/etc/udev/rules.d/rtl-sdr.rules"
         remote_src: true
         mode: '0644'
-      failed_when: false
+      when: udev_source_stat.stat.exists
 
     - name: Force udev daemon to reload rules
       ansible.builtin.command: udevadm control --reload-rules
       changed_when: false
+      when: udev_source_stat.stat.exists
 
     - name: Trigger udev modifications for connected devices
       ansible.builtin.command: udevadm trigger
       changed_when: false
+      when: udev_source_stat.stat.exists
 
     - name: Clean up temporary build source files
       ansible.builtin.file:
-        path: "{{ item.dest }}"
+        path: "{{ item.item.dest }}"
         state: absent
-      loop: "{{ sdr_compilations }}"
+      loop: "{{ sdr_binaries_stat.results }}"
       loop_control:
-        label: "{{ item.dest }}"
+        label: "{{ item.item.dest }}"
+      when: not item.stat.exists

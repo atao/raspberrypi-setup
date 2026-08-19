@@ -16,6 +16,8 @@ sdr_packages_to_install:
   - libsox-fmt-all
   - libpulse-dev
   - libx11-dev
+  - libfftw3-dev
+  - moreutils
 
 sdr_compilations:
   - name: "RTL-SDR Blog V4 drivers"
@@ -24,6 +26,13 @@ sdr_compilations:
     dest: "/tmp/rtl-sdr-blog"
     binary: "/usr/local/bin/rtl_test"
     cmake_opts: "-DINSTALL_UDEV_RULES=ON -DDETACH_KERNEL_DRIVER=ON"
+
+  - name: "csdr"
+    repo: "https://github.com/ha7ilm/csdr"
+    version: "master"
+    dest: "/tmp/csdr"
+    binary: "/usr/local/bin/csdr"
+    build_method: "make"
 
   - name: "rtl_433"
     repo: "https://github.com/merbanan/rtl_433"

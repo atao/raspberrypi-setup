@@ -10,18 +10,24 @@
   ansible.builtin.file:
     path: "{{ compilation_item.item.dest }}/build"
     state: directory
+  when: compilation_item.item.build_method | default('cmake') != 'make'
 
 - name: "Configure {{ compilation_item.item.name }} with CMake"
   ansible.builtin.command:
     cmd: "cmake ../ {{ compilation_item.item.cmake_opts }}"
     chdir: "{{ compilation_item.item.dest }}/build"
+  when: compilation_item.item.build_method | default('cmake') != 'make'
 
 - name: "Compile and install {{ compilation_item.item.name }}"
   ansible.builtin.command:
     cmd: "{{ compilation_cmd }}"
-    chdir: "{{ compilation_item.item.dest }}/build"
+    chdir: >-
+     {{ (compilation_item.item.build_method
+     | default('cmake') == 'make')
+     | ternary(compilation_item.item.dest,
+     compilation_item.item.dest ~ '/build') }}
   loop:
-    - make
+    - "make -j{{ ansible_facts['processor_vcpus'] | default(2) }}"
     - make install
   loop_control:
     loop_var: compilation_cmd
