@@ -31,7 +31,7 @@ sdr_compilations:
     repo: "https://github.com/ha7ilm/csdr"
     version: "master"
     dest: "/tmp/csdr"
-    binary: "/usr/local/bin/csdr"
+    binary: "/usr/bin/csdr"
     build_method: "make"
 
   - name: "rtl_433"

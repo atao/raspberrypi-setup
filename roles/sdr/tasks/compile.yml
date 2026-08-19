@@ -20,12 +20,14 @@
 
 - name: "Compile and install {{ compilation_item.item.name }}"
   ansible.builtin.command:
-    cmd: "{{ compilation_cmd }}"
+    cmd: >-
+      {{
+        (compilation_item.item.name == 'csdr')
+        | ternary(compilation_cmd ~ ' PARAMS_NEON="" PARAMS_ARM=""', compilation_cmd)
+      }}
     chdir: >-
       {{ (compilation_item.item.build_method | default('cmake') == 'make')
       | ternary(compilation_item.item.dest, compilation_item.item.dest ~ '/build') }}
-  environment:
-    PARAMS_SIMD: "{{ (compilation_item.item.name == 'csdr') | ternary('', None) }}"
   loop:
     - "make -j{{ ansible_facts['processor_vcpus'] | default(2) }}"
     - make install
