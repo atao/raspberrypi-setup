@@ -1,7 +1,9 @@
 ---
 apt_packages:
+  - tmux
   - screen
   - htop
+  - btop
   - vim
   - git
   - tree
