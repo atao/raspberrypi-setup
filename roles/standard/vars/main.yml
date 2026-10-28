@@ -18,6 +18,7 @@ apt_packages:
   - traceroute
   - fail2ban
   - bash-completion
+  - jq
 
 bashrc_aliases:
   - "alias ll='ls -l'"
