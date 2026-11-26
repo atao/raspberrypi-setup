@@ -1,0 +1,60 @@
+name: Dependabot – fusion automatique des correctifs
+
+# Fusionne seules les pull requests Dependabot de type « correctif » (x.y.Z),
+# une fois que TOUS les autres tests de la pull request sont terminés et verts.
+# Les montées de version mineures et majeures restent à relire à la main.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+  statuses: read
+
+jobs:
+  fusion:
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository_owner == 'atao'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Type de mise à jour
+        id: meta
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Attendre les autres tests puis fusionner (correctifs seuls)
+        if: steps.meta.outputs.update-type == 'version-update:semver-patch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          SHA: ${{ github.event.pull_request.head.sha }}
+          SELF: ${{ github.job }}
+        run: |
+          set -euo pipefail
+          sleep 30   # laisse aux autres workflows le temps de démarrer
+          for _ in $(seq 1 110); do
+            runs=$(gh api "repos/$REPO/commits/$SHA/check-runs?per_page=100" \
+              --jq "[.check_runs[] | select(.name != \"$SELF\")]")
+            pending=$(jq '[.[] | select(.status != "completed")] | length' <<<"$runs")
+            failed=$(jq '[.[] | select(.status == "completed" and (.conclusion | IN("success","skipped","neutral") | not))] | length' <<<"$runs")
+            # Statuts « anciens » (services externes) : sans aucun statut, GitHub répond « pending » → ignoré
+            status=$(gh api "repos/$REPO/commits/$SHA/status" --jq 'if (.statuses | length) == 0 then "none" else .state end')
+            if [ "$failed" -gt 0 ] || [ "$status" = "failure" ] || [ "$status" = "error" ]; then
+              echo "::warning::Un test a échoué : pas de fusion automatique."
+              jq -r '.[] | select(.conclusion != null and (.conclusion | IN("success","skipped","neutral") | not)) | "  ✗ \(.name) : \(.conclusion)"' <<<"$runs"
+              exit 0
+            fi
+            if [ "$pending" -eq 0 ] && [ "$status" != "pending" ]; then
+              echo "Tous les tests sont passés ($(jq length <<<"$runs") vérification(s)) : fusion."
+              gh pr merge "$PR" --repo "$REPO" --squash --delete-branch
+              exit 0
+            fi
+            echo "En attente de $pending test(s)…"
+            sleep 30
+          done
+          echo "::warning::Tests trop longs : pas de fusion automatique."
