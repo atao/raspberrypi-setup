@@ -1,0 +1,12 @@
+# Mises à jour automatiques des dépendances (Dependabot).
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      timezone: Europe/Paris
+    groups:
+      github_actions:
+        patterns: ["*"]
+    open-pull-requests-limit: 5
